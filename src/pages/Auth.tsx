@@ -40,13 +40,11 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen pt-24 pb-16 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden bg-[#0c1a12]">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF4E00]/10 blur-[150px] rounded-full pointer-events-none z-0" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF385C]/10 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="bg-white/5 backdrop-blur-xl py-8 px-4 shadow-2xl sm:rounded-3xl sm:px-10 border border-white/10"
         >
           <div className="mb-8 text-center">
@@ -57,7 +55,7 @@ export default function Auth() {
               {isLogin ? "Don't have an account? " : "Already have an account? "}
               <button 
                 onClick={() => setIsLogin(!isLogin)} 
-                className="font-bold text-[#FF4E00] hover:text-orange-400 transition-colors underline underline-offset-4"
+                className="font-bold text-[#FF385C] hover:text-rose-400 transition-colors underline underline-offset-4"
               >
                 {isLogin ? 'Sign up' : 'Log in'}
               </button>
@@ -84,7 +82,7 @@ export default function Auth() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 border border-white/10 rounded-xl bg-black/20 text-white placeholder-white/30 focus:outline-none focus:border-[#FF4E00] focus:ring-1 focus:ring-[#FF4E00] sm:text-sm transition-colors"
+                  className="block w-full pl-10 pr-3 py-3 border border-white/10 rounded-xl bg-black/20 text-white placeholder-white/30 focus:outline-none focus:border-[#FF385C] focus:ring-1 focus:ring-[#FF385C] sm:text-sm transition-colors"
                   placeholder="you@example.com"
                 />
               </div>
@@ -103,7 +101,7 @@ export default function Auth() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-10 py-3 border border-white/10 rounded-xl bg-black/20 text-white placeholder-white/30 focus:outline-none focus:border-[#FF4E00] focus:ring-1 focus:ring-[#FF4E00] sm:text-sm transition-colors"
+                  className="block w-full pl-10 pr-10 py-3 border border-white/10 rounded-xl bg-black/20 text-white placeholder-white/30 focus:outline-none focus:border-[#FF385C] focus:ring-1 focus:ring-[#FF385C] sm:text-sm transition-colors"
                   placeholder="••••••••"
                 />
                 <button
@@ -126,7 +124,7 @@ export default function Auth() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 rounded bg-black/50 border-white/20 text-[#FF4E00] focus:ring-[#FF4E00] focus:ring-offset-0"
+                  className="h-4 w-4 rounded bg-black/50 border-white/20 text-[#FF385C] focus:ring-[#FF385C] focus:ring-offset-0"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-white/70">
                   Remember me
@@ -135,7 +133,7 @@ export default function Auth() {
 
               {isLogin && (
                 <div className="text-sm">
-                  <a href="#" className="font-bold text-[#FF4E00] hover:text-orange-400 transition-colors">
+                  <a href="#" className="font-bold text-[#FF385C] hover:text-rose-400 transition-colors">
                     Forgot password?
                   </a>
                 </div>
@@ -146,14 +144,14 @@ export default function Auth() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-lg shadow-[#FF4E00]/20 text-sm font-bold uppercase tracking-widest text-white bg-[#FF4E00] hover:bg-orange-600 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-lg shadow-[#FF385C]/20 text-sm font-bold uppercase tracking-widest text-white bg-[#FF385C] hover:bg-[#E61E4D] focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Processing...' : (isLogin ? 'Sign in' : 'Create Account')}
                 {!isLoading && <ArrowRight className="w-4 h-4" />}
               </button>
             </div>
           </form>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

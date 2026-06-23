@@ -132,7 +132,7 @@ export default function Blogs() {
 
           <div className="space-y-4">
             <h3 className="text-[#091a11] font-bold text-lg flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center text-xs">1</span>
+              <span className="w-6 h-6 rounded-full bg-rose-500/10 text-[#FF385C] flex items-center justify-center text-xs">1</span>
               Curate and Highlight Regional Immersive Experiences
             </h3>
             <p>
@@ -142,7 +142,7 @@ export default function Blogs() {
 
           <div className="space-y-4">
             <h3 className="text-[#091a11] font-bold text-lg flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center text-xs">2</span>
+              <span className="w-6 h-6 rounded-full bg-rose-500/10 text-[#FF385C] flex items-center justify-center text-xs">2</span>
               Invest in High-Quality Visual Storytelling
             </h3>
             <p>
@@ -152,7 +152,7 @@ export default function Blogs() {
 
           <div className="space-y-4">
             <h3 className="text-[#091a11] font-bold text-lg flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center text-xs">3</span>
+              <span className="w-6 h-6 rounded-full bg-rose-500/10 text-[#FF385C] flex items-center justify-center text-xs">3</span>
               Enable Instant, Frictionless Booking Inquiries
             </h3>
             <p>
@@ -162,7 +162,7 @@ export default function Blogs() {
 
           <div className="space-y-4">
             <h3 className="text-[#091a11] font-bold text-lg flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center text-xs">4</span>
+              <span className="w-6 h-6 rounded-full bg-rose-500/10 text-[#FF385C] flex items-center justify-center text-xs">4</span>
               Create Dedicated Packages for 'Workations' & 'Staycations'
             </h3>
             <p>
@@ -172,7 +172,7 @@ export default function Blogs() {
 
           <div className="space-y-4">
             <h3 className="text-[#091a11] font-bold text-lg flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center text-xs">5</span>
+              <span className="w-6 h-6 rounded-full bg-rose-500/10 text-[#FF385C] flex items-center justify-center text-xs">5</span>
               Partner with Niche Local Discovery Networks
             </h3>
             <p>
@@ -287,18 +287,18 @@ export default function Blogs() {
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-20 bg-[#f4f7f5]">
       {/* Background Decorative Circles */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 blur-[150px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#FF4E00]/5 blur-[120px] rounded-full pointer-events-none z-0" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 blur-[150px] rounded-full pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#FF385C]/5 blur-[120px] rounded-full pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Block */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FF4E00]/15 text-[#FF4E00] rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 border border-[#FF4E00]/25">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FF385C]/15 text-[#FF385C] rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 border border-[#FF385C]/25">
             <Sparkles className="w-3.5 h-3.5" /> Resort Owner Resources & Insights
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#091a11] mb-6 leading-tight">
-            Grow Your Resort Business In <span className="text-[#FF4E00]">Maharashtra</span>
+            Grow Your Resort Business In <span className="text-[#FF385C]">Maharashtra</span>
           </h1>
           <p className="text-[#091a11]/60 text-sm md:text-base font-light leading-relaxed">
             Discover tactical advice, marketing guides, and industry news curated by hospitality specialists to help resort, villa, and farmhouse owners scale occupancy and boost profits.
@@ -321,7 +321,7 @@ export default function Blogs() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40" />
-                <span className="absolute top-4 left-4 bg-[#FF4E00] text-white text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-lg">
+                <span className="absolute top-4 left-4 bg-[#FF385C] text-white text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-lg">
                   {blog.category}
                 </span>
               </div>
@@ -330,12 +330,12 @@ export default function Blogs() {
               <div className="p-6 flex-grow flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="flex items-center gap-4 text-[#091a11]/50 text-[10px] uppercase font-bold tracking-widest">
-                    <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-[#FF4E00]" /> {blog.date}</span>
+                    <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-[#FF385C]" /> {blog.date}</span>
                     <span>•</span>
                     <span>{blog.readTime}</span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-[#091a11] leading-snug group-hover:text-[#FF4E00] transition-colors line-clamp-2">
+                  <h3 className="text-lg font-bold text-[#091a11] leading-snug group-hover:text-[#FF385C] transition-colors line-clamp-2">
                     {blog.title}
                   </h3>
 
@@ -346,7 +346,7 @@ export default function Blogs() {
 
                 <div className="pt-6 border-t border-[#091a11]/10 mt-6 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-[#FF4E00]/20 flex items-center justify-center text-[10px] font-bold text-[#091a11] border border-[#FF4E00]/30 uppercase">
+                    <div className="w-7 h-7 rounded-full bg-[#FF385C]/20 flex items-center justify-center text-[10px] font-bold text-[#091a11] border border-[#FF385C]/30 uppercase">
                       {blog.author.charAt(0)}
                     </div>
                     <div>
@@ -355,7 +355,7 @@ export default function Blogs() {
                     </div>
                   </div>
 
-                  <span className="text-[#FF4E00] text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <span className="text-[#FF385C] text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1 group-hover:gap-2 transition-all">
                     Read Article <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>
@@ -366,7 +366,7 @@ export default function Blogs() {
 
         {/* Lead Capture Banner for Resort Owners */}
         <div className="relative bg-white border border-[#091a11]/15 rounded-3xl p-8 md:p-12 overflow-hidden shadow-xl">
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#FF4E00]/5 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#FF385C]/5 blur-[100px] rounded-full pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-green-500/5 blur-[80px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -403,7 +403,7 @@ export default function Blogs() {
               <div className="space-y-3 pt-2">
                 <a 
                   href="/admin" 
-                  className="block w-full py-3.5 bg-[#FF4E00] hover:bg-orange-600 text-white rounded-xl text-center font-bold uppercase tracking-wider text-xs shadow-lg shadow-orange-500/25 transition-all"
+                  className="block w-full py-3.5 bg-[#FF385C] hover:bg-[#E61E4D] text-white rounded-xl text-center font-bold uppercase tracking-wider text-xs shadow-lg shadow-rose-500/25 transition-all"
                 >
                   Go to Partner Admin Panel
                 </a>
@@ -447,7 +447,7 @@ export default function Blogs() {
               </button>
 
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-20">
-                <span className="bg-[#FF4E00] text-white text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-lg">
+                <span className="bg-[#FF385C] text-white text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-lg">
                   {selectedBlog.category}
                 </span>
                 <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#091a11] mt-2 leading-tight">
@@ -460,7 +460,7 @@ export default function Blogs() {
             <div className="p-5 sm:p-8 md:p-10 overflow-y-auto space-y-6 flex-1 min-h-0">
               {/* Author bio block */}
               <div className="flex items-center gap-3 pb-6 border-b border-[#091a11]/10">
-                <div className="w-10 h-10 rounded-full bg-[#FF4E00]/25 flex items-center justify-center font-bold text-[#091a11] border border-[#FF4E00]/40 uppercase">
+                <div className="w-10 h-10 rounded-full bg-[#FF385C]/25 flex items-center justify-center font-bold text-[#091a11] border border-[#FF385C]/40 uppercase">
                   {selectedBlog.author.charAt(0)}
                 </div>
                 <div>
@@ -471,7 +471,7 @@ export default function Blogs() {
                   <p className="text-[10px] text-[#091a11]/60 uppercase font-medium">{selectedBlog.role}</p>
                 </div>
                 <div className="ml-auto text-[10px] text-[#091a11]/40 font-bold uppercase tracking-widest flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-[#FF4E00]" /> {selectedBlog.date}
+                  <Calendar className="w-3.5 h-3.5 text-[#FF385C]" /> {selectedBlog.date}
                 </div>
               </div>
 
@@ -481,7 +481,7 @@ export default function Blogs() {
               </article>
               
               {/* Inner call to action */}
-              <div className="bg-white border border-[#FF4E00]/20 p-6 rounded-2xl space-y-3 mt-8 shadow-sm">
+              <div className="bg-white border border-[#FF385C]/20 p-6 rounded-2xl space-y-3 mt-8 shadow-sm">
                 <p className="font-bold text-[#091a11] text-base">Want to put these strategies into practice?</p>
                 <p className="text-xs text-[#091a11]/70">
                   StaySearch helps you set custom packages, highlight your regional experiences, and start booking more guests directly with zero OTA commission deductions.
@@ -489,7 +489,7 @@ export default function Blogs() {
                 <a 
                   href="/admin" 
                   onClick={() => setSelectedBlog(null)}
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#FF4E00] hover:text-orange-400 uppercase tracking-widest"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#FF385C] hover:text-rose-400 uppercase tracking-widest"
                 >
                   List your resort now <ArrowRight className="w-3.5 h-3.5" />
                 </a>

@@ -39,7 +39,12 @@ function getLocalProperties(): Property[] {
   try {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (data) {
-      return JSON.parse(data);
+      const parsed = JSON.parse(data);
+      if (parsed.length < MOCK_PROPERTIES.length) {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(MOCK_PROPERTIES));
+        return MOCK_PROPERTIES as Property[];
+      }
+      return parsed;
     }
   } catch (e) {
     console.error("Error reading properties from localStorage", e);

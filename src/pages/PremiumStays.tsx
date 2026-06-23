@@ -48,7 +48,7 @@ export default function PremiumStays() {
             <p className="text-white/70 text-lg leading-relaxed mb-8">
               Book with confidence. All properties listed here are verified and approved by our hospitality partners, ensuring top-notch quality, hygiene, and hospitality standards.
             </p>
-            <Link to="/search" className="inline-flex py-4 px-8 bg-[#FF4E00] hover:bg-orange-600 border border-orange-500 text-white rounded-full font-bold uppercase tracking-widest text-xs transition-colors shadow-lg shadow-orange-500/20">
+            <Link to="/search" className="inline-flex py-4 px-8 bg-[#FF385C] hover:bg-[#E61E4D] border border-rose-200 text-white rounded-full font-bold uppercase tracking-widest text-xs transition-colors shadow-lg shadow-rose-500/20">
               Search All Premium Properties
             </Link>
           </div>
@@ -75,11 +75,8 @@ export default function PremiumStays() {
         ) : stays.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {stays.map((stay, idx) => (
-            <motion.div
+            <div
               key={stay.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
               className="group bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:bg-white/10 transition-colors shadow-lg flex flex-col"
             >
               <Link to={`/property/${stay.id}`} className="flex flex-col h-full">
@@ -109,10 +106,10 @@ export default function PremiumStays() {
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">
-                  <div className="text-[10px] font-bold text-orange-400 uppercase tracking-widest mb-2">
+                  <div className="text-[10px] font-bold text-[#FF385C] uppercase tracking-widest mb-2">
                     {stay.type}
                   </div>
-                  <h3 className="font-bold text-xl text-white mb-2 line-clamp-1 group-hover:text-orange-400 transition-colors">
+                  <h3 className="font-bold text-xl text-white mb-2 line-clamp-1 group-hover:text-rose-400 transition-colors">
                     {stay.title}
                   </h3>
                   <div className="flex items-center text-white/50 text-sm mb-4">
@@ -125,13 +122,13 @@ export default function PremiumStays() {
                       <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
                       {stay.rating || '4.5'} <span className="text-white/40 font-normal">({Math.floor(Math.random() * 100) + 20})</span>
                     </div>
-                    <span className="text-[10px] font-bold text-orange-400 uppercase tracking-widest bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">
+                    <span className="text-[10px] font-bold text-[#FF385C] uppercase tracking-widest bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">
                       View Details
                     </span>
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
         ) : (

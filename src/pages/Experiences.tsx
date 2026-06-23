@@ -7,7 +7,7 @@ const experiencesList = [
     title: 'Tribal Village Tour & Warli Art',
     image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/02/Nagaland-Tribal.jpg',
     desc: 'Visit an authentic tribal village, learn about their lifestyle, and participate in a genuine Warli art painting session with local artisans.',
-    icon: <Users className="w-5 h-5 text-orange-400" />
+    icon: <Users className="w-5 h-5 text-[#FF385C]" />
   },
   {
     title: 'Fort Treks & Sunrise Hikes',
@@ -32,7 +32,7 @@ const experiencesList = [
 export default function Experiences() {
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-16 bg-[#0c1a12]">
-       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
+       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
        
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
          <div className="text-center max-w-3xl mx-auto mb-16 mt-8">
@@ -48,11 +48,8 @@ export default function Experiences() {
 
          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
            {experiencesList.map((exp, idx) => (
-             <motion.div 
+             <div 
                key={idx}
-               initial={{ opacity: 0, y: 30 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.5, delay: idx * 0.1 }}
                className="group relative h-[450px] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl"
              >
                <img 
@@ -73,7 +70,7 @@ export default function Experiences() {
                    </p>
                  </div>
                </div>
-             </motion.div>
+             </div>
            ))}
          </div>
          

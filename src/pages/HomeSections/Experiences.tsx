@@ -83,7 +83,7 @@ const experiences = [
 export default function Experiences() {
   return (
     <section className="py-24 relative overflow-hidden z-10" aria-label="Experiences and itineraries">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-orange-500/5 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-rose-500/5 blur-[150px] rounded-full pointer-events-none -z-10" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -110,7 +110,7 @@ export default function Experiences() {
               >
                 <Link
                   to={`/search?category=${exp.query}`}
-                  className="group block p-6 bg-white border border-[#091a11]/10 rounded-2xl shadow-sm hover:shadow-xl hover:border-orange-500/30 transition-all duration-300 h-full relative overflow-hidden"
+                  className="group block p-6 bg-white border border-[#091a11]/10 rounded-2xl shadow-sm hover:shadow-xl hover:border-rose-500/30 transition-all duration-300 h-full relative overflow-hidden"
                 >
                   {/* Subtle top-right accent glow on card hover */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-orange-500/5 to-transparent rounded-bl-full group-hover:scale-150 transition-transform duration-500" />
@@ -122,7 +122,7 @@ export default function Experiences() {
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="text-base font-extrabold text-[#091a11] group-hover:text-orange-600 transition-colors flex items-center gap-1.5">
+                      <h3 className="text-base font-extrabold text-[#091a11] group-hover:text-[#E61E4D] transition-colors flex items-center gap-1.5">
                         {exp.title}
                         <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-orange-500" />
                       </h3>

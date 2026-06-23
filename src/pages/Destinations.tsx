@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight, Search, Compass, X } from 'lucide-react';
 
 const destinations = [
   {
@@ -9,93 +9,166 @@ const destinations = [
     image: 'https://site.outlookindia.com/traveller/wp-content/uploads/files/2015/05/200715163414-Palghar1.jpg',
     stays: 42,
     desc: 'Pristine beaches, historic forts, and beautiful nature escapes near Mumbai.',
+    tags: ['Beaches', 'Forts', 'Nature', 'Chikoo Farms'],
+    region: 'North Konkan'
   },
   {
     name: 'Lonavala',
     image: 'https://www.noblehousetours.com/wp-content/uploads/2025/08/Things-to-Do-in-Lonavala-The-Ultimate-Guide-for-First-Time-Visitors.jpg',
     stays: 68,
     desc: 'Famous hill station retreat with lush valleys, waterfalls, and scenic viewpoints.',
+    tags: ['Hill Station', 'Waterfalls', 'Valleys', 'Trekking'],
+    region: 'Pune District'
   },
   {
     name: 'Alibaug',
     image: 'https://www.stayvista.com/blog/wp-content/uploads/2024/06/Anjarle_beach-1.jpg',
     stays: 55,
     desc: 'Coastal paradise known for its clean beaches, water sports, and luxury villas.',
+    tags: ['Coastal', 'Water Sports', 'Villas', 'Seafood'],
+    region: 'Raigad'
   },
   {
     name: 'Mahabaleshwar',
     image: 'https://s7ap1.scene7.com/is/image/incredibleindia/1-pratapgarh-fort-mahabaleshwar-maharashtra-2-city-hero?qlt=82&ts=1726668937680',
     stays: 38,
     desc: 'Strawberry capital of Maharashtra featuring breathtaking mountain viewpoints.',
+    tags: ['Mountains', 'Strawberries', 'Viewpoints', 'Forts'],
+    region: 'Satara District'
   },
   {
     name: 'Igatpuri',
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
     stays: 22,
     desc: 'Misty green mountain getaway surrounded by serene lakes and waterfalls.',
+    tags: ['Monsoon', 'Lakes', 'Waterfalls', 'Vipassana'],
+    region: 'Nashik District'
   },
   {
     name: 'Dahanu',
     image: 'https://exploredahanu.com/assets/image1/3.jpg',
     stays: 30,
     desc: 'Serene chikoo orchards, beautiful homestays, and quiet uncrowded beaches.',
+    tags: ['Quiet Beaches', 'Orchards', 'Homestays', 'Warli Art'],
+    region: 'Palghar District'
   }
 ];
 
 export default function Destinations() {
-  return (
-    <div className="pt-24 min-h-screen relative overflow-hidden pb-16 bg-[#0c1a12]">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
+  const [searchQuery, setSearchQuery] = useState('');
 
+  const filteredDestinations = destinations.filter(dest => 
+    dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dest.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dest.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  return (
+    <div className="pt-28 min-h-screen relative overflow-hidden pb-24 bg-[#fafafa] font-sans">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 blur-[150px] rounded-full pointer-events-none z-0" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 mt-8">
-          <div className="inline-flex items-center gap-2 py-1 px-4 bg-white/5 border border-white/10 rounded-full mb-6">
-            <span className="w-2 h-2 rounded-full bg-orange-400"></span>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/70">Maharashtra Destinations</span>
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 py-1.5 px-4 bg-rose-50 border border-rose-100 rounded-full mb-5">
+            <Compass className="w-4 h-4 text-[#FF385C]" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#FF385C]">Maharashtra Escapes</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">Explore Destinations</h1>
-          <p className="text-white/60 text-lg">
-            From pristine beaches to misty hill stations, discover the hidden gems of Maharashtra.
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#222222] mb-4">Trending Destinations</h1>
+          <p className="text-gray-500 text-sm max-w-xl mx-auto leading-relaxed">
+            From pristine Konkan beaches to misty Sahyadri valleys, find your next perfect weekend retreat.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {destinations.map((dest, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <Link to={`/search?dest=${dest.name}`} className="group relative h-[400px] rounded-[2rem] overflow-hidden block shadow-2xl border border-white/10">
-                <img
-                  src={dest.image}
-                  alt={dest.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0c1a12]/90 via-[#0c1a12]/40 to-transparent pointer-events-none" />
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+        {/* Search Bar HUD */}
+        <div className="max-w-md mx-auto mb-16 relative">
+          <div className="relative flex items-center bg-white rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-shadow py-2.5 px-5">
+            <Search className="w-4 h-4 text-gray-400 shrink-0 mr-3" />
+            <input 
+              type="text"
+              placeholder="Search destination, region or activity..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full text-xs font-medium text-gray-800 placeholder-gray-400 bg-transparent border-none outline-none focus:ring-0"
+            />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="p-1 hover:bg-gray-150 rounded-full text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Destinations Grid */}
+        {filteredDestinations.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredDestinations.map((dest, idx) => (
+              <div
+                key={dest.name}
+              >
+                <Link 
+                  to={`/search?dest=${dest.name}`} 
+                  className="group relative h-[380px] rounded-3xl overflow-hidden block shadow-sm border border-gray-200 bg-white"
+                >
+                  <img
+                    src={dest.image}
+                    alt={`${dest.name} resorts`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
+                  
+                  {/* Stays Count Overlay Top-Left */}
+                  <div className="absolute top-4 left-4">
+                    <span className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-white bg-[#FF385C] px-3.5 py-1.5 rounded-full border border-white/10 shadow-sm">
+                      <MapPin className="w-3 h-3" /> {dest.stays} Stays
+                    </span>
+                  </div>
+
+                  {/* Text Content Overlay Bottom */}
+                  <div className="absolute bottom-6 left-6 right-6 text-left">
+                    <p className="text-[10px] text-rose-300 font-extrabold uppercase tracking-widest mb-1.5">
+                      {dest.region}
+                    </p>
+                    <h3 className="text-2xl font-black text-white mb-2">
                       {dest.name}
                     </h3>
-                    <p className="text-white/60 text-sm mb-4 line-clamp-2">{dest.desc}</p>
+                    <p className="text-white/70 text-xs font-light mb-4 line-clamp-2 leading-relaxed">
+                      {dest.desc}
+                    </p>
 
-                    <div className="flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="flex items-center gap-1 text-[#FF4E00] text-xs font-bold uppercase tracking-wider">
-                        <MapPin className="w-4 h-4" /> {dest.stays} Stays
-                      </span>
-                      <span className="bg-white/10 p-2 rounded-full border border-white/10">
-                        <ArrowRight className="w-4 h-4 text-white" />
+                    {/* Tags List */}
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {dest.tags.map(t => (
+                        <span key={t} className="px-2 py-0.5 bg-white/10 backdrop-blur-xs border border-white/10 rounded-full text-[9px] font-bold text-white/95">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex justify-end pt-1">
+                      <span className="bg-white/15 backdrop-blur-xs p-2 rounded-full border border-white/10 text-white group-hover:bg-[#FF385C] group-hover:border-[#FF385C] group-hover:scale-115 transition-all duration-300">
+                        <ArrowRight className="w-4 h-4" />
                       </span>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16 bg-white rounded-3xl border border-gray-200 shadow-sm max-w-md mx-auto p-8">
+            <Compass className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-bold text-gray-900 mb-2">No Destinations Found</h3>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              We couldn't find any destinations matching "{searchQuery}". Try searching for another name or tag.
+            </p>
+          </div>
+        )}
+
       </div>
     </div>
   );

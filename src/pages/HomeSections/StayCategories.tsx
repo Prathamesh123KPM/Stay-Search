@@ -62,13 +62,13 @@ const categories = [
 export default function StayCategories() {
   return (
     <section className="py-20 relative z-10" aria-label="Browse stay categories">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF4E00]/3 to-transparent pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF385C]/3 to-transparent pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 py-1.5 px-5 bg-[#091a11]/5 border border-[#091a11]/10 rounded-full mb-5">
-            <span className="w-2 h-2 rounded-full bg-[#FF4E00] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#FF385C] animate-pulse" />
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#091a11]/70">What Are You Looking For?</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#091a11] mb-4">
@@ -102,7 +102,7 @@ export default function StayCategories() {
                   <span className="text-4xl drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{cat.emoji}</span>
                   <h3 className="font-bold text-[#091a11] text-sm leading-tight">{cat.label}</h3>
                   <p className="text-[10px] text-[#091a11]/70 leading-snug hidden sm:block">{cat.desc}</p>
-                  <span className="mt-1 text-[9px] font-bold uppercase tracking-widest text-[#091a11]/50 group-hover:text-[#FF4E00] transition-colors">
+                  <span className="mt-1 text-[9px] font-bold uppercase tracking-widest text-[#091a11]/50 group-hover:text-[#FF385C] transition-colors">
                     Explore →
                   </span>
                 </div>
@@ -117,7 +117,7 @@ export default function StayCategories() {
             <Link
               key={kw}
               to={`/search?dest=${kw}`}
-              className="text-xs font-medium text-[#091a11]/50 hover:text-[#FF4E00] transition-colors border border-[#091a11]/10 hover:border-[#FF4E00]/30 px-4 py-2 rounded-full bg-white shadow-sm"
+              className="text-xs font-medium text-[#091a11]/50 hover:text-[#FF385C] transition-colors border border-[#091a11]/10 hover:border-[#FF385C]/30 px-4 py-2 rounded-full bg-white shadow-sm"
             >
               {kw}
             </Link>

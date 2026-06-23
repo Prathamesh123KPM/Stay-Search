@@ -2109,14 +2109,14 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
   };
 
   return (
-    <div className="min-h-screen pt-28 pb-24 bg-[#0a120e] text-[#f1f5f9] font-sans selection:bg-[#FF4E00] selection:text-white">
+    <div className="min-h-screen pt-28 pb-24 bg-[#0a120e] text-[#f1f5f9] font-sans selection:bg-[#FF385C] selection:text-white">
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Minimal Header with Settings Toggle */}
         <div className="flex items-center justify-between pb-8 border-b border-white/10 mb-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF4E00] to-orange-500 flex items-center justify-center text-white shadow-lg shadow-[#FF4E00]/20">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF385C] to-orange-500 flex items-center justify-center text-white shadow-lg shadow-[#FF385C]/20">
               <Compass className="w-5 h-5 animate-spin" style={{ animationDuration: '12s' }} />
             </div>
             <div>
@@ -2127,7 +2127,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
 
           <button 
             onClick={() => setShowSettings(!showSettings)}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${showSettings ? 'bg-[#FF4E00] text-white border-[#FF4E00]' : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/10'}`}
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${showSettings ? 'bg-[#FF385C] text-white border-[#FF385C]' : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/10'}`}
           >
             <Settings className="w-4 h-4" />
             <span className="hidden sm:inline">AI Settings</span>
@@ -2156,11 +2156,11 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="Paste Gemini API Key..."
-                    className="flex-1 bg-[#0a120e] border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#FF4E00]"
+                    className="flex-1 bg-[#0a120e] border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#FF385C]"
                   />
                   <button 
                     onClick={() => setShowSettings(false)}
-                    className="px-6 py-2.5 bg-[#FF4E00] hover:bg-orange-600 text-white rounded-xl text-xs font-bold transition-all"
+                    className="px-6 py-2.5 bg-[#FF385C] hover:bg-[#E61E4D] text-white rounded-xl text-xs font-bold transition-all"
                   >
                     Save & Close
                   </button>
@@ -2180,7 +2180,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
               {!isSearchingCustom ? (
                 <button 
                   onClick={() => setIsSearchingCustom(true)}
-                  className="text-xs font-bold text-[#FF4E00] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-bold text-[#FF385C] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <Search className="w-3.5 h-3.5" /> Type Custom Location
                 </button>
@@ -2203,13 +2203,13 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                     value={customInput}
                     onChange={(e) => setCustomInput(e.target.value)}
                     placeholder="Type any village, fort, beach, or hill station (e.g. Kaas Plateau, Harihareshwar)..."
-                    className="w-full bg-[#0a120e] border border-[#FF4E00] rounded-2xl pl-11 pr-4 py-3.5 text-sm font-bold text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF4E00]"
+                    className="w-full bg-[#0a120e] border border-[#FF385C] rounded-2xl pl-11 pr-4 py-3.5 text-sm font-bold text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF385C]"
                     autoFocus
                   />
                 </div>
                 <button 
                   type="submit"
-                  className="px-6 py-3.5 bg-[#FF4E00] hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider rounded-2xl transition-all"
+                  className="px-6 py-3.5 bg-[#FF385C] hover:bg-[#E61E4D] text-white text-xs font-bold uppercase tracking-wider rounded-2xl transition-all"
                 >
                   Search
                 </button>
@@ -2222,7 +2222,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                     onClick={() => handleDestinationSelect(dest)}
                     className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       destination === dest 
-                        ? 'bg-[#FF4E00] text-white shadow-lg shadow-[#FF4E00]/20 scale-105' 
+                        ? 'bg-[#FF385C] text-white shadow-lg shadow-[#FF385C]/20 scale-105' 
                         : 'bg-white/5 text-white/70 hover:bg-white/10 border border-white/5 hover:text-white'
                     }`}
                   >
@@ -2244,7 +2244,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                   <button
                     key={days}
                     onClick={() => { setDuration(days); generateTrip(destination, days, travelerType, vibe); }}
-                    className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${duration === days ? 'bg-[#FF4E00] text-white shadow-md' : 'text-white/60 hover:text-white'}`}
+                    className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${duration === days ? 'bg-[#FF385C] text-white shadow-md' : 'text-white/60 hover:text-white'}`}
                   >
                     {days}d
                   </button>
@@ -2258,7 +2258,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
               <select
                 value={travelerType}
                 onChange={(e) => { setTravelerType(e.target.value); generateTrip(destination, duration, e.target.value, vibe); }}
-                className="w-full bg-[#0a120e] border border-white/10 rounded-2xl px-4 py-3 text-xs font-bold text-white focus:outline-none focus:border-[#FF4E00] cursor-pointer appearance-none"
+                className="w-full bg-[#0a120e] border border-white/10 rounded-2xl px-4 py-3 text-xs font-bold text-white focus:outline-none focus:border-[#FF385C] cursor-pointer appearance-none"
               >
                 <option value="Couples / Romance">💑 Couples & Romance</option>
                 <option value="Family with Kids">👨‍👩‍👧‍👦 Family & Kids</option>
@@ -2273,7 +2273,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
               <select
                 value={vibe}
                 onChange={(e) => { setVibe(e.target.value); generateTrip(destination, duration, travelerType, e.target.value); }}
-                className="w-full bg-[#0a120e] border border-white/10 rounded-2xl px-4 py-3 text-xs font-bold text-white focus:outline-none focus:border-[#FF4E00] cursor-pointer appearance-none"
+                className="w-full bg-[#0a120e] border border-white/10 rounded-2xl px-4 py-3 text-xs font-bold text-white focus:outline-none focus:border-[#FF385C] cursor-pointer appearance-none"
               >
                 <option value="Luxury & Resort Relaxing">✨ Luxury Resort Living</option>
                 <option value="Nature, Camping & Treks">🌲 Nature Treks & Camping</option>
@@ -2290,7 +2290,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
         <div className="mb-14">
           <div className="flex flex-col mb-8">
             <h2 className="text-lg md:text-xl font-black text-white tracking-tight flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#FF4E00]" />
+              <Sparkles className="w-5 h-5 text-[#FF385C]" />
               <span>Our Featured Fixed Departures & Tours</span>
             </h2>
             <p className="text-xs text-white/60 mt-0.5">Handcrafted premium group experiences with stays, meals, and transit included</p>
@@ -2300,7 +2300,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
             {FIXED_TOURS.map((tour) => (
               <div 
                 key={tour.id} 
-                className="group bg-[#12221a] rounded-3xl border border-white/10 overflow-hidden hover:border-[#FF4E00]/30 transition-all flex flex-col justify-between shadow-xl"
+                className="group bg-[#12221a] rounded-3xl border border-white/10 overflow-hidden hover:border-[#FF385C]/30 transition-all flex flex-col justify-between shadow-xl"
               >
                 <div>
                   {/* Tour Image */}
@@ -2311,7 +2311,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#12221a] to-transparent"></div>
-                    <span className="absolute top-3 left-3 bg-[#FF4E00] text-white text-[9px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full shadow-md">
+                    <span className="absolute top-3 left-3 bg-[#FF385C] text-white text-[9px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full shadow-md">
                       {tour.duration} Days
                     </span>
                     <span className="absolute bottom-3 right-3 text-[10px] font-bold text-white/90 bg-[#0a120e]/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10">
@@ -2378,7 +2378,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
         {/* Loading Spinner */}
         {isGenerating && (
           <div className="py-20 flex flex-col items-center justify-center text-center space-y-6 bg-[#12221a]/60 rounded-3xl border border-white/10 backdrop-blur-md shadow-2xl">
-            <div className="w-12 h-12 border-4 border-[#FF4E00] border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-[#FF385C] border-t-transparent rounded-full animate-spin"></div>
             <div>
               <h3 className="text-lg font-bold text-white mb-1">Synthesizing AI Concierge Itinerary...</h3>
               <p className="text-xs text-white/60">Fetching verified routes and premium stays for {destination}...</p>
@@ -2403,11 +2403,11 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
               <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
                 <div className="max-w-2xl">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="px-3 py-1 rounded-full bg-[#FF4E00]/20 border border-[#FF4E00]/40 text-[#FF4E00] text-[10px] font-extrabold uppercase tracking-widest">
+                    <span className="px-3 py-1 rounded-full bg-[#FF385C]/20 border border-[#FF385C]/40 text-[#FF385C] text-[10px] font-extrabold uppercase tracking-widest">
                       AI Verified Route
                     </span>
                     <span className="text-xs font-bold text-white/70 flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#FF4E00]" /> {activeTrip.driveTime}
+                      <Clock className="w-3.5 h-3.5 text-[#FF385C]" /> {activeTrip.driveTime}
                     </span>
                   </div>
                   <h2 className="text-3xl md:text-5xl font-black text-white mb-2 tracking-tight">{activeTrip.name}</h2>
@@ -2428,13 +2428,13 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                   onClick={copyToClipboard}
                   className="flex-1 sm:flex-none px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-xs font-bold transition-all border border-white/10 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <Share2 className="w-3.5 h-3.5 text-[#FF4E00]" /> {copied ? 'Copied!' : 'Share Itinerary'}
+                  <Share2 className="w-3.5 h-3.5 text-[#FF385C]" /> {copied ? 'Copied!' : 'Share Itinerary'}
                 </button>
                 <a
                   href={`https://wa.me/${universalWhatsApp}?text=${whatsappText}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-6 py-2.5 bg-[#FF4E00] hover:bg-orange-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#FF4E00]/20 cursor-pointer"
+                  className="flex-1 sm:flex-none px-6 py-2.5 bg-[#FF385C] hover:bg-[#E61E4D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#FF385C]/20 cursor-pointer"
                 >
                   <CheckCircle2 className="w-4 h-4" /> Book Entire Trip
                 </a>
@@ -2444,12 +2444,12 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
             {/* Minimalist Day Stream */}
             <div className="space-y-6">
               {activeTrip.days.map((day, idx) => (
-                <div key={idx} className="bg-[#12221a] rounded-3xl border border-white/10 p-6 md:p-8 shadow-xl relative overflow-hidden group hover:border-[#FF4E00]/30 transition-all">
+                <div key={idx} className="bg-[#12221a] rounded-3xl border border-white/10 p-6 md:p-8 shadow-xl relative overflow-hidden group hover:border-[#FF385C]/30 transition-all">
                   
                   {/* Day Title Header */}
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 mb-6 border-b border-white/10 gap-2">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#FF4E00]">Day {idx + 1} Schedule</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#FF385C]">Day {idx + 1} Schedule</span>
                       <h3 className="text-xl md:text-2xl font-bold text-white mt-1">{day.dayTitle}</h3>
                     </div>
                     <span className="px-3 py-1 rounded-full bg-white/5 text-[11px] font-semibold text-white/70 border border-white/10">
@@ -2462,7 +2462,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                     
                     {/* Morning */}
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-[#FF4E00] text-xs font-bold uppercase tracking-wider mb-1">
+                      <div className="flex items-center gap-2 text-[#FF385C] text-xs font-bold uppercase tracking-wider mb-1">
                         <Sun className="w-4 h-4" /> Morning
                       </div>
                       <h4 className="text-sm font-bold text-white leading-snug">{day.morning?.title}</h4>
@@ -2492,7 +2492,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                   {/* Stay Recommendation Footer Pill */}
                   <div className="bg-[#0a120e] p-4 md:p-5 rounded-2xl border border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FF4E00] font-black text-sm">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FF385C] font-black text-sm">
                         ★
                       </div>
                       <div>
@@ -2506,7 +2506,7 @@ Note: Ensure the 'days' array has exactly ${tripDays} items.`;
                         href={`https://wa.me/${universalWhatsApp}?text=${encodeURIComponent(`Hi StaySearch! I want to check availability for ${day.stayRecommendation?.name} in ${activeTrip.name}.`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-5 py-2.5 bg-white/10 hover:bg-[#FF4E00] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-white/10 cursor-pointer"
+                        className="px-5 py-2.5 bg-white/10 hover:bg-[#FF385C] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-white/10 cursor-pointer"
                       >
                         Reserve Stay <ArrowRight className="w-3.5 h-3.5" />
                       </a>

@@ -61,18 +61,14 @@ export default function Reviews() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((review, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
               className="bg-white border border-[#091a11]/10 p-8 rounded-3xl relative shadow-md group hover:shadow-xl hover:bg-white transition-all duration-300"
             >
-              <Quote className="absolute top-8 right-8 w-12 h-12 text-[#091a11]/5 group-hover:text-orange-500/20 transition-colors" />
+              <Quote className="absolute top-8 right-8 w-12 h-12 text-[#091a11]/5 group-hover:text-[#E61E4D]/20 transition-colors" />
 
               {/* Stay badge */}
-              <span className="inline-block text-[9px] font-bold uppercase tracking-widest text-orange-600 bg-orange-600/10 border border-orange-600/20 px-3 py-1 rounded-full mb-4">
+              <span className="inline-block text-[9px] font-bold uppercase tracking-widest text-[#FF385C] bg-orange-600/10 border border-orange-600/20 px-3 py-1 rounded-full mb-4">
                 {review.stay}
               </span>
 
@@ -88,10 +84,10 @@ export default function Reviews() {
                 <img src={review.image} alt={review.name} className="w-12 h-12 rounded-full object-cover border-2 border-[#091a11]/20" />
                 <div>
                   <h4 className="font-bold text-[#091a11]">{review.name}</h4>
-                  <p className="text-xs text-orange-600 uppercase tracking-wider font-bold mt-1">{review.role}</p>
+                  <p className="text-xs text-[#FF385C] uppercase tracking-wider font-bold mt-1">{review.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -99,7 +95,7 @@ export default function Reviews() {
         <div className="text-center mt-12">
           <Link
             to="/search"
-            className="inline-flex items-center gap-2 bg-[#FF4E00] hover:bg-orange-600 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all shadow-xl shadow-[#FF4E00]/30 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-[#FF385C] hover:bg-[#E61E4D] text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all shadow-xl shadow-[#FF385C]/30 hover:-translate-y-0.5"
           >
             Explore Resorts & Inquire Now
           </Link>

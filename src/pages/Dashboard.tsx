@@ -87,7 +87,7 @@ export default function Dashboard() {
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-16 bg-[#0c1a12]">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-rose-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-8">Dashboard</h1>
@@ -104,16 +104,16 @@ export default function Dashboard() {
                  <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mt-1 truncate px-2">{user.email}</p>
                </div>
                <nav className="p-4 space-y-2">
-                 <button onClick={() => setActiveTab('profile')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'profile' ? 'text-[#FF4E00] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
+                 <button onClick={() => setActiveTab('profile')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'profile' ? 'text-[#FF385C] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
                    <User className="w-4 h-4" /> Profile
                  </button>
-                 <button onClick={() => setActiveTab('bookings')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'bookings' ? 'text-[#FF4E00] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
+                 <button onClick={() => setActiveTab('bookings')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'bookings' ? 'text-[#FF385C] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
                    <Navigation className="w-4 h-4" /> My Inquiries
                  </button>
-                 <button onClick={() => setActiveTab('favorites')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'favorites' ? 'text-[#FF4E00] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
+                 <button onClick={() => setActiveTab('favorites')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'favorites' ? 'text-[#FF385C] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
                    <Heart className="w-4 h-4" /> Saved Stays
                  </button>
-                 <button onClick={() => setActiveTab('nearby')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'nearby' ? 'text-[#FF4E00] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
+                 <button onClick={() => setActiveTab('nearby')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors ${activeTab === 'nearby' ? 'text-[#FF385C] bg-white/5 border border-white/10' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
                    <MapPin className="w-4 h-4" /> Stays Near You
                  </button>
                  <hr className="my-4 border-white/10" />
@@ -192,10 +192,10 @@ export default function Dashboard() {
                               </div>
                             </div>
                             <div className="p-4 flex flex-col flex-grow">
-                              <div className="text-[10px] font-bold text-orange-400 uppercase tracking-widest mb-1">
+                              <div className="text-[10px] font-bold text-[#FF385C] uppercase tracking-widest mb-1">
                                 {stay.type}
                               </div>
-                              <h3 className="font-bold text-base text-white mb-1 line-clamp-1 group-hover:text-orange-400 transition-colors">
+                              <h3 className="font-bold text-base text-white mb-1 line-clamp-1 group-hover:text-rose-400 transition-colors">
                                 {stay.name}
                               </h3>
                               <div className="flex items-center text-white/50 text-xs mb-3">
@@ -203,7 +203,7 @@ export default function Dashboard() {
                                 {stay.location}
                               </div>
                               <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-3">
-                                <span className="text-[10px] font-bold text-orange-400 uppercase tracking-widest bg-orange-400/10 px-2.5 py-0.5 rounded border border-orange-400/20">
+                                <span className="text-[10px] font-bold text-[#FF385C] uppercase tracking-widest bg-orange-400/10 px-2.5 py-0.5 rounded border border-orange-400/20">
                                   View Details
                                 </span>
                               </div>
@@ -241,7 +241,7 @@ export default function Dashboard() {
 
                   {locationLoading || propertiesLoading ? (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
-                      <div className="w-10 h-10 border-4 border-[#FF4E00] border-t-transparent rounded-full animate-spin mb-4"></div>
+                      <div className="w-10 h-10 border-4 border-[#FF385C] border-t-transparent rounded-full animate-spin mb-4"></div>
                       <p className="text-white/70 text-sm font-bold uppercase tracking-widest">Detecting your location...</p>
                     </div>
                   ) : nearbyStays.length > 0 ? (
@@ -256,16 +256,16 @@ export default function Dashboard() {
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-[#0c1a12]/80 to-transparent pointer-events-none" />
-                              <div className="absolute top-3 left-3 bg-[#FF4E00] text-white px-2.5 py-1 rounded-md text-[9px] font-bold shadow-md uppercase tracking-wider flex items-center gap-1 border border-[#FF4E00]/20">
+                              <div className="absolute top-3 left-3 bg-[#FF385C] text-white px-2.5 py-1 rounded-md text-[9px] font-bold shadow-md uppercase tracking-wider flex items-center gap-1 border border-[#FF385C]/20">
                                 <MapPin className="w-3 h-3" />
                                 {stay.distance < 1 ? `${(stay.distance * 1000).toFixed(0)} m` : `${stay.distance.toFixed(1)} km`} away
                               </div>
                             </div>
                             <div className="p-4 flex flex-col flex-grow">
-                              <div className="text-[10px] font-bold text-orange-400 uppercase tracking-widest mb-1">
+                              <div className="text-[10px] font-bold text-[#FF385C] uppercase tracking-widest mb-1">
                                 {stay.type || 'Resort'}
                               </div>
-                              <h3 className="font-bold text-base text-white mb-1 line-clamp-1 group-hover:text-orange-400 transition-colors">
+                              <h3 className="font-bold text-base text-white mb-1 line-clamp-1 group-hover:text-rose-400 transition-colors">
                                 {stay.title}
                               </h3>
                               <div className="flex items-center text-white/50 text-xs mb-3">

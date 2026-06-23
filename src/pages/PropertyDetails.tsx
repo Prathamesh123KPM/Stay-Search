@@ -43,6 +43,27 @@ export default function PropertyDetails() {
   const propertyId = String(id || '1');
   const isFav = isFavorite(propertyId);
 
+  const displayImages = property?.images && property.images.length > 0 
+    ? property.images 
+    : [
+        'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1584132967334-10e028b03046?q=80&w=800&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop'
+      ];
+
+  const galleryImages = [...displayImages];
+  while (galleryImages.length < 5) {
+    const fallbacks = [
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1584132967334-10e028b03046?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
+    ];
+    galleryImages.push(fallbacks[galleryImages.length % fallbacks.length]);
+  }
+
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(1);
@@ -96,51 +117,43 @@ export default function PropertyDetails() {
     });
   };
 
-  const displayImages = property?.images && property.images.length > 0 
-    ? property.images 
-    : [
-        'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1584132967334-10e028b03046?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop'
-      ];
 
   return (
-    <div className="pt-20 md:pt-28 min-h-screen relative overflow-hidden pb-24 md:pb-16 bg-[#f4f7f5]">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 blur-[150px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
+    <div className="pt-20 md:pt-28 min-h-screen relative overflow-hidden pb-24 md:pb-16 bg-gray-50">
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FF385C]/5 blur-[150px] rounded-full pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] hidden" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {loading ? (
           <div className="flex justify-center items-center py-40">
-            <div className="text-emerald-950/50 text-xl font-bold uppercase tracking-widest">Loading property...</div>
+            <div className="text-gray-500 text-xl font-bold uppercase tracking-widest">Loading property...</div>
           </div>
         ) : !property ? (
           <div className="flex flex-col justify-center items-center py-40 space-y-6">
-            <div className="text-emerald-950/50 text-xl font-bold uppercase tracking-widest">Property Not Found</div>
-            <Link to="/search" className="bg-[#FF4E00] hover:bg-orange-600 px-6 py-3 rounded-full text-white font-bold uppercase tracking-widest text-xs transition-colors shadow-lg">Back to Stays</Link>
+            <div className="text-gray-500 text-xl font-bold uppercase tracking-widest">Property Not Found</div>
+            <Link to="/search" className="bg-[#FF385C] hover:bg-[#E61E4D] px-6 py-3 rounded-full text-white font-bold uppercase tracking-widest text-xs transition-colors shadow-lg">Back to Stays</Link>
           </div>
         ) : (
           <>
             {/* Breadcrumb & Actions */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 py-4 px-6 bg-white rounded-2xl border border-emerald-950/10 mt-6 shadow-sm">
-              <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-emerald-950/50">
-                <Link to="/" className="hover:text-[#FF4E00] transition-colors">Home</Link>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 py-4 px-6 bg-white rounded-2xl border border-gray-200 mt-6 shadow-sm">
+              <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gray-500">
+                <Link to="/" className="hover:text-[#FF385C] transition-colors">Home</Link>
                 <span>/</span>
-                <Link to="/search?dest=kelva" className="hover:text-[#FF4E00] transition-colors">kelva Beach</Link>
+                <Link to="/search?dest=kelva" className="hover:text-[#FF385C] transition-colors">kelva Beach</Link>
                 <span>/</span>
-                <span className="text-emerald-950/90 truncate max-w-[150px] sm:max-w-none">{property.title}</span>
+                <span className="text-[#222222] truncate max-w-[150px] sm:max-w-none">{property.title}</span>
               </div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between md:justify-end gap-4 w-full md:w-auto border-t border-emerald-950/5 pt-3 md:pt-0 md:border-t-0">
-                <Link to="/search" className="flex items-center justify-center gap-2 text-orange-600 hover:text-orange-500 transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-orange-500/10 px-4 py-2 rounded-full border border-orange-500/20 w-full sm:w-auto text-center">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between md:justify-end gap-4 w-full md:w-auto border-t border-gray-100 pt-3 md:pt-0 md:border-t-0">
+                <Link to="/search" className="flex items-center justify-center gap-2 text-[#FF385C] hover:text-[#E61E4D] transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-rose-50 px-4 py-2 rounded-full border border-rose-200 w-full sm:w-auto text-center">
                   Explore More Stays
                 </Link>
                 <div className="flex items-center justify-center gap-6 w-full sm:w-auto">
-                  <button className="flex items-center gap-2 text-emerald-950/70 hover:text-emerald-950 transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                  <button className="flex items-center gap-2 text-gray-600 hover:text-[#222222] transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-wider">
                     <Share className="w-4 h-4" /> Share
                   </button>
-                  <button onClick={handleSave} className={`flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors ${isFav ? 'text-red-500' : 'text-emerald-950/70 hover:text-red-400'}`}>
+                  <button onClick={handleSave} className={`flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors ${isFav ? 'text-red-500' : 'text-gray-600 hover:text-red-400'}`}>
                     <Heart className={`w-4 h-4 ${isFav ? 'fill-red-500' : ''}`} /> {isFav ? 'Saved' : 'Save'}
                   </button>
                 </div>
@@ -155,7 +168,7 @@ export default function PropertyDetails() {
                     <ShieldCheck className="w-3 h-3" /> Verified Stay
                   </span>
                 )}
-                <span className="bg-orange-500/10 text-[#FF4E00] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-[#FF4E00]/20">
+                <span className="bg-rose-50 text-[#FF385C] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-[#FF385C]/20">
                   {property.type || 'Resort'}
                 </span>
                 {property.isFeatured && (
@@ -164,17 +177,17 @@ export default function PropertyDetails() {
                   </span>
                 )}
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-emerald-950 mb-4 leading-tight">{property.title}</h1>
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm font-bold text-emerald-950/80">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#222222] mb-4 leading-tight">{property.title}</h1>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm font-bold text-gray-700">
                 <div className="flex items-center gap-1">
                   <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                   <span>{property.rating || '4.5'}</span>
-                  <span className="text-emerald-950/40 underline cursor-pointer hover:text-emerald-950/70 font-medium ml-1">({Math.floor(Math.random() * 100) + 20} reviews)</span>
+                  <span className="text-gray-400 underline cursor-pointer hover:text-gray-600 font-medium ml-1">({Math.floor(Math.random() * 100) + 20} reviews)</span>
                 </div>
                 <div className="hidden sm:block w-1 h-1 rounded-full bg-emerald-950/20" />
                 <div className="flex items-center gap-1">
-                  <MapPin className="w-4 h-4 text-[#FF4E00]" />
-                  <span className="underline cursor-pointer hover:text-emerald-950/90">{property.location}</span>
+                  <MapPin className="w-4 h-4 text-[#FF385C]" />
+                  <span className="underline cursor-pointer hover:text-[#222222]">{property.location}</span>
                 </div>
               </div>
             </div>
@@ -191,7 +204,7 @@ export default function PropertyDetails() {
                 }}
               >
                 {displayImages.map((img, idx) => (
-                  <div key={idx} className="min-w-full h-full snap-start relative flex-shrink-0 rounded-3xl overflow-hidden border border-emerald-950/10 shadow-md">
+                  <div key={idx} className="min-w-full h-full snap-start relative flex-shrink-0 rounded-3xl overflow-hidden border border-gray-200 shadow-md">
                     <img src={img} alt={`${property.title} - ${idx + 1}`} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/40 via-transparent to-transparent pointer-events-none" />
                   </div>
@@ -200,7 +213,7 @@ export default function PropertyDetails() {
               
               {/* Dot Indicators */}
               {displayImages.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-emerald-950/10 shadow-sm">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
                   {displayImages.map((_, idx) => (
                     <button
                       key={idx}
@@ -213,7 +226,7 @@ export default function PropertyDetails() {
                           });
                         }
                       }}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${activeImageIndex === idx ? 'bg-[#FF4E00] w-3' : 'bg-emerald-950/25 w-1.5'}`}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${activeImageIndex === idx ? 'bg-[#FF385C] w-3' : 'bg-emerald-950/25 w-1.5'}`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
                   ))}
@@ -235,7 +248,7 @@ export default function PropertyDetails() {
                       }
                     }}
                     disabled={activeImageIndex === 0}
-                    className={`absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-emerald-950/10 flex items-center justify-center text-emerald-950 transition-opacity ${activeImageIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                    className={`absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-gray-200 flex items-center justify-center text-[#222222] transition-opacity ${activeImageIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -251,7 +264,7 @@ export default function PropertyDetails() {
                       }
                     }}
                     disabled={activeImageIndex === displayImages.length - 1}
-                    className={`absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-emerald-950/10 flex items-center justify-center text-emerald-950 transition-opacity ${activeImageIndex === displayImages.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-gray-200 flex items-center justify-center text-[#222222] transition-opacity ${activeImageIndex === displayImages.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -261,17 +274,17 @@ export default function PropertyDetails() {
 
             {/* Desktop Image Gallery */}
             <div className="hidden md:grid md:grid-cols-4 gap-4 mb-12 h-[60vh]">
-              <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden relative group border border-emerald-950/10 shadow-md">
+              <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
                 <img src={property.images?.[0] || 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop'} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
               </div>
-              <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-emerald-950/10 shadow-md">
+              <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
                 <img src={property.images?.[1] || 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-emerald-950/10 shadow-md">
+              <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
                 <img src={property.images?.[2] || 'https://images.unsplash.com/photo-1584132967334-10e028b03046?q=80&w=800&auto=format&fit=crop'} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <div className="md:col-span-2 rounded-3xl overflow-hidden relative group hidden md:block border border-emerald-950/10 shadow-md">
+              <div className="md:col-span-2 rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
                 <img src={property.images?.[3] || 'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop'} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
                   <button className="bg-white/20 text-white border border-white/30 px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white/30 transition-colors shadow-lg">
@@ -288,26 +301,26 @@ export default function PropertyDetails() {
               <div className="lg:col-span-2 space-y-12">
 
                 {/* Description */}
-                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-md">
-                  <h2 className="text-2xl font-bold tracking-tight text-emerald-950 mb-6">About this property</h2>
-                  <p className="text-emerald-950/70 leading-relaxed text-lg font-light mb-8">
+                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-md">
+                  <h2 className="text-2xl font-bold tracking-tight text-[#222222] mb-6">About this property</h2>
+                  <p className="text-gray-600 leading-relaxed text-lg font-light mb-8">
                     {property.description}
                   </p>
 
                   {/* 4 Small Option Boxes */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-emerald-950/10">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-gray-200">
                     {/* Box 1: Contact Number */}
                     <a 
                       href={`https://wa.me/${property.contactNumber ? (property.contactNumber.replace(/[^0-9]/g, '').length === 10 ? '91' + property.contactNumber.replace(/[^0-9]/g, '') : property.contactNumber.replace(/[^0-9]/g, '')) : '919987091858'}?text=${encodeURIComponent(`Hello! I found your contact on StaySearch regarding *${property.title}*.`)}`} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="flex flex-col items-center justify-center p-4 bg-[#f4f7f5]/55 border border-emerald-950/10 hover:border-[#FF4E00]/40 rounded-2xl hover:bg-emerald-50/70 transition-all text-center group"
+                      className="flex flex-col items-center justify-center p-4 bg-gray-50/55 border border-gray-200 hover:border-[#FF385C]/40 rounded-2xl hover:bg-rose-50/20/70 transition-all text-center group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <Phone className="w-5 h-5 text-orange-600" />
+                      <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <Phone className="w-5 h-5 text-[#FF385C]" />
                       </div>
-                      <span className="text-[10px] font-bold text-emerald-950/50 uppercase tracking-widest">Contact Number</span>
-                      <span className="text-xs text-emerald-950 mt-1 font-semibold truncate max-w-full">{property.contactNumber || 'Not Available'}</span>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Contact Number</span>
+                      <span className="text-xs text-[#222222] mt-1 font-semibold truncate max-w-full">{property.contactNumber || 'Not Available'}</span>
                     </a>
 
                     {/* Box 2: Website Link */}
@@ -316,13 +329,13 @@ export default function PropertyDetails() {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       onClick={e => { if (!property.websiteLink) e.preventDefault(); }}
-                      className={`flex flex-col items-center justify-center p-4 bg-[#f4f7f5]/55 border border-emerald-950/10 hover:border-[#FF4E00]/40 rounded-2xl hover:bg-emerald-50/70 transition-all text-center group ${!property.websiteLink ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex flex-col items-center justify-center p-4 bg-gray-50/55 border border-gray-200 hover:border-[#FF385C]/40 rounded-2xl hover:bg-rose-50/20/70 transition-all text-center group ${!property.websiteLink ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                      <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <Globe className="w-5 h-5 text-orange-600" />
+                      <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <Globe className="w-5 h-5 text-[#FF385C]" />
                       </div>
-                      <span className="text-[10px] font-bold text-emerald-950/50 uppercase tracking-widest">Website Link</span>
-                      <span className="text-xs text-emerald-950 mt-1 font-semibold truncate max-w-full">{property.websiteLink ? 'Visit Website' : 'Not Available'}</span>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Website Link</span>
+                      <span className="text-xs text-[#222222] mt-1 font-semibold truncate max-w-full">{property.websiteLink ? 'Visit Website' : 'Not Available'}</span>
                     </a>
 
                     {/* Box 3: GMB Profile */}
@@ -331,13 +344,13 @@ export default function PropertyDetails() {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       onClick={e => { if (!property.googleMyBusiness) e.preventDefault(); }}
-                      className={`flex flex-col items-center justify-center p-4 bg-[#f4f7f5]/55 border border-emerald-950/10 hover:border-[#FF4E00]/40 rounded-2xl hover:bg-emerald-50/70 transition-all text-center group ${!property.googleMyBusiness ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex flex-col items-center justify-center p-4 bg-gray-50/55 border border-gray-200 hover:border-[#FF385C]/40 rounded-2xl hover:bg-rose-50/20/70 transition-all text-center group ${!property.googleMyBusiness ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                      <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <MapPin className="w-5 h-5 text-orange-600" />
+                      <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <MapPin className="w-5 h-5 text-[#FF385C]" />
                       </div>
-                      <span className="text-[10px] font-bold text-emerald-950/50 uppercase tracking-widest">GMB Profile</span>
-                      <span className="text-xs text-emerald-950 mt-1 font-semibold truncate max-w-full">{property.googleMyBusiness ? 'Recent Reviews' : 'Not Available'}</span>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">GMB Profile</span>
+                      <span className="text-xs text-[#222222] mt-1 font-semibold truncate max-w-full">{property.googleMyBusiness ? 'Recent Reviews' : 'Not Available'}</span>
                     </a>
 
                     {/* Box 4: Instagram Profile */}
@@ -346,64 +359,64 @@ export default function PropertyDetails() {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       onClick={e => { if (!property.instagramProfile) e.preventDefault(); }}
-                      className={`flex flex-col items-center justify-center p-4 bg-[#f4f7f5]/55 border border-emerald-950/10 hover:border-[#FF4E00]/40 rounded-2xl hover:bg-emerald-50/70 transition-all text-center group ${!property.instagramProfile ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex flex-col items-center justify-center p-4 bg-gray-50/55 border border-gray-200 hover:border-[#FF385C]/40 rounded-2xl hover:bg-rose-50/20/70 transition-all text-center group ${!property.instagramProfile ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                      <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <Instagram className="w-5 h-5 text-orange-600" />
+                      <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <Instagram className="w-5 h-5 text-[#FF385C]" />
                       </div>
-                      <span className="text-[10px] font-bold text-emerald-950/50 uppercase tracking-widest">Instagram</span>
-                      <span className="text-xs text-emerald-950 mt-1 font-semibold truncate max-w-full">{property.instagramProfile ? 'View Profile' : 'Not Available'}</span>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Instagram</span>
+                      <span className="text-xs text-[#222222] mt-1 font-semibold truncate max-w-full">{property.instagramProfile ? 'View Profile' : 'Not Available'}</span>
                     </a>
                   </div>
                 </section>
 
                 {/* Amenities */}
-                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-md">
-                  <h2 className="text-2xl font-bold tracking-tight text-emerald-950 mb-8">What this place offers</h2>
+                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-md">
+                  <h2 className="text-2xl font-bold tracking-tight text-[#222222] mb-8">What this place offers</h2>
                   <div className="grid grid-cols-2 gap-y-4 sm:gap-y-6 gap-x-4 sm:gap-x-8">
                     {(property.amenities || []).map(amenity => (
-                      <div key={amenity} className="flex items-center gap-3 sm:gap-4 text-emerald-950/80 font-medium text-sm sm:text-base">
-                        <div className="p-2 bg-[#f4f7f5]/80 rounded-xl border border-emerald-950/10 flex-shrink-0">
+                      <div key={amenity} className="flex items-center gap-3 sm:gap-4 text-gray-700 font-medium text-sm sm:text-base">
+                        <div className="p-2 bg-gray-50/80 rounded-xl border border-gray-200 flex-shrink-0">
                           {/* Simplified icon selection based on amenity name */}
-                          {amenity.includes('WiFi') ? <Wifi className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" /> :
-                            amenity.includes('Air') ? <Wind className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" /> :
-                              amenity.includes('Parking') ? <Car className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" /> :
-                                amenity.includes('Restaurant') ? <Coffee className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" /> :
-                                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />}
+                          {amenity.includes('WiFi') ? <Wifi className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF385C]" /> :
+                            amenity.includes('Air') ? <Wind className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF385C]" /> :
+                              amenity.includes('Parking') ? <Car className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF385C]" /> :
+                                amenity.includes('Restaurant') ? <Coffee className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF385C]" /> :
+                                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF385C]" />}
                         </div>
                         {amenity}
                       </div>
                     ))}
                   </div>
-                  <button className="mt-10 border border-emerald-950/20 text-emerald-950 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[#f4f7f5] transition-colors shadow-md w-full sm:w-auto">
+                  <button className="mt-10 border border-emerald-950/20 text-[#222222] px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-gray-50 transition-colors shadow-md w-full sm:w-auto">
                     Show all 24 amenities
                   </button>
                 </section>
 
                 {/* Resort Policy & Specifications */}
-                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-md">
-                  <h2 className="text-2xl font-bold tracking-tight text-emerald-950 mb-6">Resort Policy & Specifications</h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8 border-b border-emerald-950/10 pb-6">
+                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-md">
+                  <h2 className="text-2xl font-bold tracking-tight text-[#222222] mb-6">Resort Policy & Specifications</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8 border-b border-gray-200 pb-6">
                     <div>
-                      <p className="text-emerald-950/40 text-[10px] font-bold uppercase tracking-widest mb-1">Max Capacity</p>
-                      <p className="text-emerald-950 font-bold text-base sm:text-lg">{property.maxGuests || 4} Guests</p>
+                      <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Max Capacity</p>
+                      <p className="text-[#222222] font-bold text-base sm:text-lg">{property.maxGuests || 4} Guests</p>
                     </div>
                     <div>
-                      <p className="text-emerald-950/40 text-[10px] font-bold uppercase tracking-widest mb-1">Rooms & Baths</p>
-                      <p className="text-emerald-950 font-bold text-base sm:text-lg">
+                      <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Rooms & Baths</p>
+                      <p className="text-[#222222] font-bold text-base sm:text-lg">
                         {property.bedrooms || 2} BR / {property.bathrooms || 2} BA
                       </p>
                     </div>
                     <div>
-                      <p className="text-emerald-950/40 text-[10px] font-bold uppercase tracking-widest mb-1">Timings</p>
-                      <p className="text-emerald-950 font-bold text-xs sm:text-sm">
+                      <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Timings</p>
+                      <p className="text-[#222222] font-bold text-xs sm:text-sm">
                         In: {property.checkInTime || '12:00 PM'}<br/>
                         Out: {property.checkOutTime || '10:00 AM'}
                       </p>
                     </div>
                     <div>
-                      <p className="text-emerald-950/40 text-[10px] font-bold uppercase tracking-widest mb-1">Food Options</p>
-                      <p className="text-emerald-950 font-bold text-base sm:text-lg">
+                      <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Food Options</p>
+                      <p className="text-[#222222] font-bold text-base sm:text-lg">
                         {property.foodType === 'Veg' ? 'Veg Only' : property.foodType === 'Non-Veg' ? 'Non-Veg Only' : 'Veg & Non-Veg'}
                       </p>
                     </div>
@@ -411,11 +424,11 @@ export default function PropertyDetails() {
 
                   {property.rules && property.rules.length > 0 ? (
                     <div>
-                      <h3 className="text-emerald-950 font-bold text-sm uppercase tracking-wider mb-4">House Rules & Guidelines</h3>
+                      <h3 className="text-[#222222] font-bold text-sm uppercase tracking-wider mb-4">House Rules & Guidelines</h3>
                       <ul className="space-y-2">
                         {property.rules.map((rule, idx) => (
-                          <li key={idx} className="text-emerald-950/70 text-sm flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-2 flex-shrink-0" />
+                          <li key={idx} className="text-gray-600 text-sm flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] mt-2 flex-shrink-0" />
                             {rule}
                           </li>
                         ))}
@@ -423,8 +436,8 @@ export default function PropertyDetails() {
                     </div>
                   ) : (
                     <div>
-                      <h3 className="text-emerald-950 font-bold text-sm uppercase tracking-wider mb-4">House Rules & Guidelines</h3>
-                      <ul className="space-y-2 text-emerald-950/50 text-sm">
+                      <h3 className="text-[#222222] font-bold text-sm uppercase tracking-wider mb-4">House Rules & Guidelines</h3>
+                      <ul className="space-y-2 text-gray-500 text-sm">
                         <li className="flex items-start gap-2">Standard check-in guidelines apply. Proper ID proof required during check-in.</li>
                         <li className="flex items-start gap-2">Couples and families are welcome. Respect local neighborhood policies.</li>
                       </ul>
@@ -433,21 +446,16 @@ export default function PropertyDetails() {
                 </section>
 
                 {/* Location (Map Placeholder) */}
-                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-md">
-                  <h2 className="text-2xl font-bold tracking-tight text-emerald-950 mb-6">Where you'll be</h2>
-                  <div className="bg-[#f4f7f5] h-64 sm:h-96 w-full rounded-2xl flex items-center justify-center relative overflow-hidden group border border-emerald-950/10">
-                    {/* Decorative mock map */}
-                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop" alt="Map Location" className="w-full h-full object-cover opacity-60 mix-blend-luminosity" />
-                    <div className="absolute inset-0 bg-[#FF4E00]/5 mix-blend-multiply" />
-                    <div className="absolute p-3 sm:p-4 bg-white/80 backdrop-blur-xl border border-emerald-950/10 shadow-2xl rounded-2xl flex items-center gap-3 sm:gap-4 max-w-[90%] sm:max-w-none">
-                      <div className="bg-[#FF4E00] p-2.5 sm:p-3 rounded-xl shadow-lg shadow-[#FF4E00]/30 flex-shrink-0">
-                        <MapPin className="text-white w-5 h-5 sm:w-6 sm:h-6" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-emerald-950 text-sm sm:text-lg truncate max-w-[180px] sm:max-w-none">{property.title}</p>
-                        <p className="text-[10px] text-emerald-950/50 uppercase tracking-widest font-bold mt-0.5 sm:mt-1">{property.location}</p>
-                      </div>
-                    </div>
+                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-md">
+                  <h2 className="text-2xl font-bold tracking-tight text-[#222222] mb-6">Where you'll be</h2>
+                  <div className="h-64 sm:h-96 w-full rounded-2xl overflow-hidden border border-gray-200 shadow-sm relative z-10">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      title="Google Maps"
+                      src={`https://maps.google.com/maps?q=${encodeURIComponent(property.location || property.title)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+                      className="border-0 w-full h-full"
+                    />
                   </div>
                   {property.mapsUrl && (
                     <div className="mt-4 flex justify-end">
@@ -455,7 +463,7 @@ export default function PropertyDetails() {
                         href={property.mapsUrl} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#FF4E00] hover:text-[#FF4E00]/80 transition-colors"
+                        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#FF385C] hover:text-[#FF385C]/80 transition-colors"
                       >
                         Open in Google Maps &rarr;
                       </a>
@@ -467,52 +475,52 @@ export default function PropertyDetails() {
 
               {/* Right Column - Inquiry Widget */}
               <div id="inquiry-widget" className="lg:col-span-1 relative">
-                <div className="sticky top-32 bg-white rounded-3xl shadow-[0_8px_30px_rgba(9,26,17,0.08)] border border-emerald-950/10 p-6 sm:p-8">
+                <div className="sticky top-32 bg-white rounded-3xl shadow-[0_8px_30px_rgba(9,26,17,0.08)] border border-gray-200 p-6 sm:p-8">
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-emerald-950">Inquire Stay</h3>
-                      <div className="flex items-center gap-1 text-sm font-bold text-emerald-950/90">
+                      <h3 className="text-xl font-bold text-[#222222]">Inquire Stay</h3>
+                      <div className="flex items-center gap-1 text-sm font-bold text-[#222222]">
                         <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                         {property.rating || '4.5'}
                       </div>
                     </div>
                     
                     {/* Price & Package Includes */}
-                    <div className="mt-2 bg-[#f4f7f5] border border-emerald-950/10 rounded-2xl p-4">
-                      <p className="text-[10px] font-bold text-emerald-950/40 uppercase tracking-widest mb-1">Standard Pricing</p>
+                    <div className="mt-2 bg-gray-50 border border-gray-200 rounded-2xl p-4">
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Standard Pricing</p>
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-2xl font-black text-emerald-950">₹{property.price}</span>
-                        <span className="text-xs text-emerald-950/50 font-bold">
+                        <span className="text-2xl font-black text-[#222222]">₹{property.price}</span>
+                        <span className="text-xs text-gray-500 font-bold">
                           {property.type?.toLowerCase() === 'villa' ? 'per night' : 'Per Person'}
                         </span>
                       </div>
                       
                       {/* Package Includes Info */}
-                      <div className="mt-3 pt-3 border-t border-emerald-950/5 space-y-2">
-                        <p className="text-[9px] font-bold text-orange-600 uppercase tracking-wider mb-1">Package Includes:</p>
+                      <div className="mt-3 pt-3 border-t border-gray-100 space-y-2">
+                        <p className="text-[9px] font-bold text-[#FF385C] uppercase tracking-wider mb-1">Package Includes:</p>
                         {property.type?.toLowerCase() === 'villa' ? (
                           <>
-                            <div className="flex items-center gap-2 text-xs text-emerald-950/80">
-                              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                            <div className="flex items-center gap-2 text-xs text-gray-700">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] flex-shrink-0" />
                               <span>Stay</span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-emerald-950/80">
-                              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                            <div className="flex items-center gap-2 text-xs text-gray-700">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] flex-shrink-0" />
                               <span>Indoor/ Outdoor Activities</span>
                             </div>
                           </>
                         ) : (
                           <>
-                            <div className="flex items-center gap-2 text-xs text-emerald-950/80">
-                              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                            <div className="flex items-center gap-2 text-xs text-gray-700">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] flex-shrink-0" />
                               <span>Stay</span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-emerald-950/80">
-                              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                            <div className="flex items-center gap-2 text-xs text-gray-700">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] flex-shrink-0" />
                               <span>All Meal Plan</span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-emerald-950/80">
-                              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                            <div className="flex items-center gap-2 text-xs text-gray-700">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] flex-shrink-0" />
                               <span>Indoor/ Outdoor Activities</span>
                             </div>
                           </>
@@ -522,22 +530,22 @@ export default function PropertyDetails() {
                   </div>
 
                   {/* Form elements */}
-                  <div className="border border-emerald-950/15 rounded-2xl overflow-hidden mb-8 bg-[#f4f7f5]/40">
-                    <div className="flex border-b border-emerald-950/15">
-                      <div className="w-1/2 p-4 border-r border-emerald-950/15">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-[#FF4E00] block mb-2">Check-in</label>
-                        <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="w-full outline-none text-sm bg-transparent text-emerald-950 focus:text-[#FF4E00]" style={{ colorScheme: 'light' }} />
+                  <div className="border border-gray-200 rounded-2xl overflow-hidden mb-8 bg-gray-50/40">
+                    <div className="flex border-b border-gray-200">
+                      <div className="w-1/2 p-4 border-r border-gray-200">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-[#FF385C] block mb-2">Check-in</label>
+                        <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="w-full outline-none text-sm bg-transparent text-[#222222] focus:text-[#FF385C]" style={{ colorScheme: 'light' }} />
                       </div>
                       <div className="w-1/2 p-4">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-[#FF4E00] block mb-2">Check-out</label>
-                        <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="w-full outline-none text-sm bg-transparent text-emerald-950 focus:text-[#FF4E00]" style={{ colorScheme: 'light' }} />
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-[#FF385C] block mb-2">Check-out</label>
+                        <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="w-full outline-none text-sm bg-transparent text-[#222222] focus:text-[#FF385C]" style={{ colorScheme: 'light' }} />
                       </div>
                     </div>
                     <div className="p-4">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-[#FF4E00] block mb-2">Guests</label>
-                      <select value={guests} onChange={(e) => setGuests(Number(e.target.value))} className="w-full outline-none text-sm bg-transparent text-emerald-950 border-none focus:ring-0 cursor-pointer">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-[#FF385C] block mb-2">Guests</label>
+                      <select value={guests} onChange={(e) => setGuests(Number(e.target.value))} className="w-full outline-none text-sm bg-transparent text-[#222222] border-none focus:ring-0 cursor-pointer">
                         {Array.from({ length: Math.max(property.maxGuests || 10, 20) }, (_, i) => i + 1).map((num) => (
-                          <option key={num} value={num} className="bg-white text-emerald-950">
+                          <option key={num} value={num} className="bg-white text-[#222222]">
                             {num} {num === 1 ? 'Guest' : 'Guests'}
                           </option>
                         ))}
@@ -552,7 +560,7 @@ export default function PropertyDetails() {
                     </button>
                   </div>
 
-                  <p className="text-center text-xs font-medium text-emerald-950/50 leading-relaxed">
+                  <p className="text-center text-xs font-medium text-gray-500 leading-relaxed">
                     Connect directly with the resort host via WhatsApp to confirm details, availability and booking.
                   </p>
                 </div>
@@ -565,12 +573,12 @@ export default function PropertyDetails() {
 
       {/* Mobile Sticky Booking Bar */}
       {property && !loading && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-emerald-950/10 p-4 z-50 flex items-center justify-between md:hidden shadow-[0_-10px_30px_rgba(9,26,17,0.08)]">
+        <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 p-4 z-50 flex items-center justify-between md:hidden shadow-[0_-10px_30px_rgba(9,26,17,0.08)]">
           <div>
-            <p className="text-emerald-950/40 text-[10px] font-bold uppercase tracking-widest">Starting from</p>
-            <p className="text-emerald-950 font-bold text-lg">
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Starting from</p>
+            <p className="text-[#222222] font-bold text-lg">
               ₹{property.price}{' '}
-              <span className="text-xs text-emerald-950/50 font-normal">
+              <span className="text-xs text-gray-500 font-normal">
                 {property.type?.toLowerCase() === 'villa' ? 'per night' : 'Per Person'}
               </span>
             </p>

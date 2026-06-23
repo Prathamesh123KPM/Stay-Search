@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full md:w-auto">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center shadow-inner">
-              <ShieldCheck className="w-5 h-5 text-orange-400" />
+              <ShieldCheck className="w-5 h-5 text-[#FF385C]" />
             </div>
             <div>
               <p className="text-[11px] font-bold uppercase tracking-wider text-white">Verified Stays</p>
@@ -58,20 +58,20 @@ export default function Footer() {
                   className="w-10 h-10 rounded-lg object-cover border border-white/10 shadow-sm" 
                 />
                 <span className="text-2xl font-bold tracking-tight text-white drop-shadow-md">
-                  StaySearch<span className="text-[#FF4E00]">.</span>
+                  StaySearch<span className="text-[#FF385C]">.</span>
                 </span>
               </Link>
               <p className="text-white/50 text-sm leading-relaxed">
                 Your gateway to Maharashtra tourism. Discover trusted, verified stays across gorgeous beaches, lush green forests, and serene villages.
               </p>
               <div className="flex items-center gap-4">
-                <a href="#" className="p-2 bg-white/5 hover:bg-[#FF4E00] rounded-full transition-colors border border-white/10">
+                <a href="#" className="p-2 bg-white/5 hover:bg-[#FF385C] rounded-full transition-colors border border-white/10">
                   <Facebook className="w-4 h-4 text-white" />
                 </a>
-                <a href="#" className="p-2 bg-white/5 hover:bg-[#FF4E00] rounded-full transition-colors border border-white/10">
+                <a href="#" className="p-2 bg-white/5 hover:bg-[#FF385C] rounded-full transition-colors border border-white/10">
                   <Twitter className="w-4 h-4 text-white" />
                 </a>
-                <a href="#" className="p-2 bg-white/5 hover:bg-[#FF4E00] rounded-full transition-colors border border-white/10">
+                <a href="#" className="p-2 bg-white/5 hover:bg-[#FF385C] rounded-full transition-colors border border-white/10">
                   <Instagram className="w-4 h-4 text-white" />
                 </a>
               </div>
@@ -83,7 +83,7 @@ export default function Footer() {
               <ul className="space-y-3 text-sm text-white/50">
                 {['kelva Beach', 'Dahanu', 'Jawhar', 'Bordi', 'Saphale', 'Wada'].map((dest) => (
                   <li key={dest}>
-                    <Link to={`/search?dest=${dest}`} className="hover:text-[#FF4E00] transition-colors">
+                    <Link to={`/search?dest=${dest}`} className="hover:text-[#FF385C] transition-colors">
                       Stays in {dest}
                     </Link>
                   </li>
@@ -95,7 +95,7 @@ export default function Footer() {
             <div>
               <h3 className="text-white font-bold tracking-wider uppercase text-xs mb-6">Support & Resources</h3>
               <ul className="space-y-3 text-sm text-white/50">
-                <li><Link to="/blogs" className="text-orange-400 font-bold hover:text-orange-300 transition-colors">Resort Owner Blog</Link></li>
+                <li><Link to="/blogs" className="text-[#FF385C] font-bold hover:text-orange-300 transition-colors">Resort Owner Blog</Link></li>
                 <li><Link to="/about" className="hover:text-white transition-colors">About StaySearch</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
                 <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
@@ -114,11 +114,11 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="bg-white/5 border items-center border-white/10 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#FF4E00] text-sm"
+                  className="bg-white/5 border items-center border-white/10 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#FF385C] text-sm"
                 />
                 <button
                   type="submit"
-                  className="bg-[#FF4E00] hover:bg-orange-600 text-white px-4 py-3 rounded-lg font-bold uppercase tracking-wider transition-colors text-xs shadow-lg shadow-orange-500/20"
+                  className="bg-[#FF385C] hover:bg-[#E61E4D] text-white px-4 py-3 rounded-lg font-bold uppercase tracking-wider transition-colors text-xs shadow-lg shadow-rose-500/20"
                 >
                   Subscribe
                 </button>

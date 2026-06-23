@@ -113,6 +113,66 @@ export const MOCK_PROPERTIES = [
     availability: true,
     ownerId: 'admin_user_id',
     createdAt: new Date().toISOString()
+  },
+  {
+    id: 'prop-9',
+    title: 'The Mist Valley Villa',
+    location: 'Khandala, Lonavala',
+    description: 'A luxurious 4BHK villa offering breathtaking valley views, a private infinity pool, and a beautifully landscaped lawn.',
+    price: 15000,
+    rating: 4.9,
+    type: 'Villa',
+    amenities: ['Free WiFi', 'Swimming Pool', 'AC', 'Lawn & Garden', 'Kitchen', 'Valley View'],
+    images: ['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200&auto=format&fit=crop', 'https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200&auto=format&fit=crop'],
+    availability: true,
+    ownerId: 'admin_user_id',
+    createdAt: new Date().toISOString(),
+    isFeatured: true
+  },
+  {
+    id: 'prop-10',
+    title: 'Cloud 9 Hill Resort',
+    location: 'Tungarli, Lonavala',
+    description: 'Perched on a hilltop, Cloud 9 offers cozy rooms, an outdoor swimming pool, and an open-air restaurant serving delicious food.',
+    price: 6500,
+    rating: 4.7,
+    type: 'Resort',
+    amenities: ['Free WiFi', 'Swimming Pool', 'Restaurant', 'AC', 'Hill View', 'Parking'],
+    images: ['https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=1200&auto=format&fit=crop', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop'],
+    availability: true,
+    ownerId: 'admin_user_id',
+    createdAt: new Date().toISOString(),
+    isFeatured: true
+  },
+  {
+    id: 'prop-11',
+    title: 'Whispering Pines Cabin',
+    location: 'Gold Valley, Lonavala',
+    description: 'A rustic wooden cabin nestled among pine trees. Perfect for couples looking for a romantic and secluded retreat in the hills.',
+    price: 5800,
+    rating: 4.8,
+    type: 'Cabin',
+    amenities: ['Free WiFi', 'AC', 'Kitchen', 'Barbecue', 'Private Garden', 'Pet Friendly'],
+    images: ['https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1200&auto=format&fit=crop', 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1200&auto=format&fit=crop'],
+    availability: true,
+    ownerId: 'admin_user_id',
+    createdAt: new Date().toISOString(),
+    isFeatured: true
+  },
+  {
+    id: 'prop-12',
+    title: 'Earthy Stone Villa',
+    location: 'Lonavala East, Lonavala',
+    description: 'A beautifully crafted stone villa featuring traditional architecture, spacious balconies, a private plunge pool, and local home-cooked meals.',
+    price: 12500,
+    rating: 4.6,
+    type: 'Villa',
+    amenities: ['Free WiFi', 'Plunge Pool', 'AC', 'Home Cooked Food', 'Balcony', 'Indoor Games'],
+    images: ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop'],
+    availability: true,
+    ownerId: 'admin_user_id',
+    createdAt: new Date().toISOString(),
+    isFeatured: true
   }
 ];
 

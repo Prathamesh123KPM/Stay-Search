@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { useAuth } from './AuthContext';
 import { bookingService, Booking } from '../services/bookingService';
 import { authService } from '../services/authService';
+import { Property } from '../services/propertyService';
 
 export interface FavoriteProperty {
   id: string | number;
@@ -16,9 +17,13 @@ export interface FavoriteProperty {
 interface UserContextType {
   favorites: FavoriteProperty[];
   bookings: Booking[];
+  compareList: Property[];
   loadingData: boolean;
   toggleFavorite: (property: FavoriteProperty) => Promise<void>;
   isFavorite: (propertyId: string | number) => boolean;
+  toggleCompare: (property: Property) => void;
+  isComparing: (propertyId: string | number) => boolean;
+  clearCompare: () => void;
   fetchUserBookings: () => Promise<void>;
 }
 
@@ -28,6 +33,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [favorites, setFavorites] = useState<FavoriteProperty[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
+  const [compareList, setCompareList] = useState<Property[]>([]);
   const [loadingData, setLoadingData] = useState(true);
 
   const loadUserData = async () => {
@@ -78,8 +84,43 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return favorites.some(fav => fav.id === propertyId);
   };
 
+  const toggleCompare = (property: Property) => {
+    if (!property.id) return;
+    setCompareList(prev => {
+      const exists = prev.some(item => item.id === property.id);
+      if (exists) {
+        return prev.filter(item => item.id !== property.id);
+      } else {
+        if (prev.length >= 3) {
+          alert("You can compare a maximum of 3 properties at a time.");
+          return prev;
+        }
+        return [...prev, property];
+      }
+    });
+  };
+
+  const isComparing = (propertyId: string | number) => {
+    return compareList.some(item => item.id === propertyId);
+  };
+
+  const clearCompare = () => {
+    setCompareList([]);
+  };
+
   return (
-    <UserContext.Provider value={{ favorites, bookings, loadingData, toggleFavorite, isFavorite, fetchUserBookings: loadUserData }}>
+    <UserContext.Provider value={{ 
+      favorites, 
+      bookings, 
+      compareList,
+      loadingData, 
+      toggleFavorite, 
+      isFavorite, 
+      toggleCompare, 
+      isComparing, 
+      clearCompare,
+      fetchUserBookings: loadUserData 
+    }}>
       {children}
     </UserContext.Provider>
   );

@@ -15,13 +15,13 @@ const destinations = [
 export default function Destinations() {
   return (
     <section className="py-24 relative z-10">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#FF4E00]/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#FF385C]/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-12">
           <div>
             <div className="inline-flex items-center gap-2 py-1 px-4 bg-[#091a11]/5 border border-[#091a11]/10 rounded-full mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#FF4E00]" />
+              <span className="w-2 h-2 rounded-full bg-[#FF385C]" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#091a11]/70">Weekend Getaways Near Mumbai</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#091a11] mb-4">Trending Destinations in Maharashtra</h2>
@@ -29,7 +29,7 @@ export default function Destinations() {
               Best resorts, hotels &amp; family stays near Mumbai — beaches, hill stations, and farm escapes all in one place.
             </p>
           </div>
-          <Link to="/search" className="hidden md:flex items-center gap-2 text-[#FF4E00] font-bold uppercase tracking-widest text-xs hover:text-orange-400 transition-colors border-b border-[#FF4E00] pb-1">
+          <Link to="/search" className="hidden md:flex items-center gap-2 text-[#FF385C] font-bold uppercase tracking-widest text-xs hover:text-rose-400 transition-colors border-b border-[#FF385C] pb-1">
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -56,11 +56,11 @@ export default function Destinations() {
                   </span>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-[10px] text-orange-400 font-bold uppercase tracking-widest mb-1">{dest.tagline}</p>
+                  <p className="text-[10px] text-[#FF385C] font-bold uppercase tracking-widest mb-1">{dest.tagline}</p>
                   <h3 className="text-2xl font-bold text-white mb-2">{dest.name}</h3>
                   <div className="flex justify-between items-center">
                     <span className="text-white/60 text-xs font-bold uppercase tracking-wider">{dest.stays}+ Verified Stays</span>
-                    <span className="bg-[#FF4E00] px-4 py-2 rounded-full text-white text-[10px] font-bold uppercase tracking-widest group-hover:bg-orange-500 transition-colors shadow-lg shadow-[#FF4E00]/30">
+                    <span className="bg-[#FF385C] px-4 py-2 rounded-full text-white text-[10px] font-bold uppercase tracking-widest group-hover:bg-rose-500 transition-colors shadow-lg shadow-[#FF385C]/30">
                       Explore
                     </span>
                   </div>
