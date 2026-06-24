@@ -346,6 +346,23 @@ export default function SearchResults() {
     if (sortBy === 'price-asc') return a.price - b.price;
     if (sortBy === 'price-desc') return b.price - a.price;
     if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
+    
+    // Sort by default order: Coconut Valley -> Raj Resort -> Betel Leaf Resort -> others
+    const orderedTitles = ['coconut valley', 'raj resort', 'betel leaf'];
+    const aTitle = a.title.toLowerCase();
+    const bTitle = b.title.toLowerCase();
+    const aIdx = orderedTitles.findIndex(title => aTitle.includes(title));
+    const bIdx = orderedTitles.findIndex(title => bTitle.includes(title));
+    
+    if (aIdx !== -1 && bIdx !== -1) {
+      return aIdx - bIdx;
+    }
+    if (aIdx !== -1) {
+      return -1;
+    }
+    if (bIdx !== -1) {
+      return 1;
+    }
     return 0;
   });
 
