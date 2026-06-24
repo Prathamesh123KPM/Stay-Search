@@ -154,12 +154,29 @@ export default function FeaturedStays() {
   const { toggleFavorite, isFavorite } = useUser();
   const [stays, setStays] = React.useState<Property[]>(() => {
     const data = propertyService.getLocalPropertiesSync();
-    let featured = data.filter(p => p.isFeatured);
-    if (featured.length < 8) {
-      const nonFeatured = data.filter(p => !p.isFeatured);
+    const coconutValley = data.find(p => p.title.toLowerCase().includes('coconut valley'));
+    const rajResort = data.find(p => p.title.toLowerCase().includes('raj resort'));
+    const betelLeaf = data.find(p => p.title.toLowerCase().includes('betel leaf'));
+    
+    const remaining = data.filter(p => 
+      !p.title.toLowerCase().includes('coconut valley') && 
+      !p.title.toLowerCase().includes('raj resort') &&
+      !p.title.toLowerCase().includes('betel leaf')
+    );
+    
+    let featured = remaining.filter(p => p.isFeatured);
+    if (featured.length < 5) {
+      const nonFeatured = remaining.filter(p => !p.isFeatured);
       featured = [...featured, ...nonFeatured];
     }
-    return featured.slice(0, 8);
+    
+    const finalStays: Property[] = [];
+    if (coconutValley) finalStays.push(coconutValley);
+    if (rajResort) finalStays.push(rajResort);
+    if (betelLeaf) finalStays.push(betelLeaf);
+    finalStays.push(...featured.slice(0, 8 - finalStays.length));
+    
+    return finalStays;
   });
   const [loading, setLoading] = React.useState(() => {
     return propertyService.getLocalPropertiesSync().length === 0;
@@ -169,12 +186,29 @@ export default function FeaturedStays() {
     const fetchStays = async () => {
       try {
         const data = await propertyService.getAllProperties();
-        let featured = data.filter(p => p.isFeatured);
-        if (featured.length < 8) {
-          const nonFeatured = data.filter(p => !p.isFeatured);
+        const coconutValley = data.find(p => p.title.toLowerCase().includes('coconut valley'));
+        const rajResort = data.find(p => p.title.toLowerCase().includes('raj resort'));
+        const betelLeaf = data.find(p => p.title.toLowerCase().includes('betel leaf'));
+        
+        const remaining = data.filter(p => 
+          !p.title.toLowerCase().includes('coconut valley') && 
+          !p.title.toLowerCase().includes('raj resort') &&
+          !p.title.toLowerCase().includes('betel leaf')
+        );
+        
+        let featured = remaining.filter(p => p.isFeatured);
+        if (featured.length < 5) {
+          const nonFeatured = remaining.filter(p => !p.isFeatured);
           featured = [...featured, ...nonFeatured];
         }
-        setStays(featured.slice(0, 8));
+        
+        const finalStays: Property[] = [];
+        if (coconutValley) finalStays.push(coconutValley);
+        if (rajResort) finalStays.push(rajResort);
+        if (betelLeaf) finalStays.push(betelLeaf);
+        finalStays.push(...featured.slice(0, 8 - finalStays.length));
+        
+        setStays(finalStays);
       } catch (error) {
         console.error("Failed to load featured stays", error);
       } finally {
@@ -200,17 +234,27 @@ export default function FeaturedStays() {
         {loading ? (
           <div className="flex justify-center py-20 text-gray-400 font-bold uppercase tracking-widest text-xs">Loading stays...</div>
         ) : stays.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stays.map((stay, idx) => (
-              <HomeStayCard
-                key={stay.id}
-                stay={stay}
-                idx={idx}
-                isFavorite={isFavorite}
-                toggleFavorite={toggleFavorite}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {stays.map((stay, idx) => (
+                <HomeStayCard
+                  key={stay.id}
+                  stay={stay}
+                  idx={idx}
+                  isFavorite={isFavorite}
+                  toggleFavorite={toggleFavorite}
+                />
+              ))}
+            </div>
+            <div className="mt-12 flex justify-center">
+              <Link 
+                to="/search" 
+                className="bg-[#FF385C] hover:bg-[#E61E4D] text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-all shadow-lg hover:shadow-xl hover:scale-102 duration-300"
+              >
+                See All Listed Properties
+              </Link>
+            </div>
+          </>
         ) : (
           <div className="text-center text-gray-400 py-12">No properties available.</div>
         )}

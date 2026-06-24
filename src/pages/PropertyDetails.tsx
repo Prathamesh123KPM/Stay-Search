@@ -52,17 +52,8 @@ export default function PropertyDetails() {
         'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop'
       ];
 
+  // Display only the uploaded images (or default mockup list if none are uploaded)
   const galleryImages = [...displayImages];
-  while (galleryImages.length < 5) {
-    const fallbacks = [
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1584132967334-10e028b03046?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop'
-    ];
-    galleryImages.push(fallbacks[galleryImages.length % fallbacks.length]);
-  }
 
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
@@ -287,25 +278,64 @@ export default function PropertyDetails() {
             )}
  
             {/* Desktop Image Gallery */}
-            <div className="hidden md:grid md:grid-cols-4 gap-4 mb-12 h-[60vh]">
-              <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
-                <img src={galleryImages[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
-              </div>
-              <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
-                <img src={galleryImages[1]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
-                <img src={galleryImages[2]} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="md:col-span-2 rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
-                <img src={galleryImages[3]} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
-                  <button className="bg-white/20 text-white border border-white/30 px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white/30 transition-colors shadow-lg">
-                    View all photos
-                  </button>
+            <div className="hidden md:block mb-12">
+              {galleryImages.length === 1 && (
+                <div className="h-[60vh] rounded-3xl overflow-hidden border border-gray-200 shadow-md relative group">
+                  <img src={galleryImages[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
                 </div>
-              </div>
+              )}
+              {galleryImages.length === 2 && (
+                <div className="grid grid-cols-2 gap-4 h-[60vh]">
+                  <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-md relative group">
+                    <img src={galleryImages[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
+                  </div>
+                  <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-md relative group">
+                    <img src={galleryImages[1]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                </div>
+              )}
+              {galleryImages.length === 3 && (
+                <div className="grid grid-cols-3 gap-4 h-[60vh]">
+                  <div className="col-span-2 rounded-3xl overflow-hidden border border-gray-200 shadow-md relative group">
+                    <img src={galleryImages[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
+                  </div>
+                  <div className="grid grid-rows-2 gap-4">
+                    <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-md relative group">
+                      <img src={galleryImages[1]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                    <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-md relative group">
+                      <img src={galleryImages[2]} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {galleryImages.length >= 4 && (
+                <div className="grid grid-cols-4 gap-4 h-[60vh]">
+                  <div className="col-span-2 row-span-2 rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
+                    <img src={galleryImages[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
+                  </div>
+                  <div className="rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
+                    <img src={galleryImages[1]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
+                    <img src={galleryImages[2]} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="col-span-2 rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
+                    <img src={galleryImages[3]} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    {galleryImages.length > 4 && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                        <button className="bg-white/20 text-white border border-white/30 px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white/30 transition-colors shadow-lg">
+                          View all {galleryImages.length} photos
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Content Breakdown */}
@@ -467,7 +497,10 @@ export default function PropertyDetails() {
                       width="100%"
                       height="100%"
                       title="Google Maps"
-                      src={`https://maps.google.com/maps?q=${encodeURIComponent(property.location || property.title)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+                      src={property.mapsUrl && property.mapsUrl.includes('google.com/maps') && (property.mapsUrl.includes('/embed') || property.mapsUrl.includes('pb='))
+                        ? property.mapsUrl
+                        : `https://maps.google.com/maps?q=${encodeURIComponent(property.title + ', ' + property.location)}&t=&z=14&ie=UTF8&iwloc=&output=embed`
+                      }
                       className="border-0 w-full h-full"
                     />
                   </div>

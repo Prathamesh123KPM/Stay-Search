@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
-import { 
-  MapPin, Star, ShieldCheck, Heart, Search, Plus, Minus, 
-  Layers, EyeOff, Navigation, X, Check, Filter, Compass, 
-  GitCompare, Wifi, Wind, Car, Eye, SlidersHorizontal, Users 
+import {
+  MapPin, Star, ShieldCheck, Heart, Search, Plus, Minus,
+  Layers, EyeOff, Navigation, X, Check, Filter, Compass,
+  GitCompare, Wifi, Wind, Car, Eye, SlidersHorizontal, Users
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useUser } from '../context/UserContext';
@@ -64,9 +64,8 @@ const StayCard: React.FC<StayCardProps> = ({
 
   return (
     <div
-      className={`group bg-white rounded-3xl overflow-hidden border transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md flex flex-col cursor-pointer relative ${
-        isHovered ? 'border-[#FF385C]' : 'border-gray-200 hover:border-gray-300'
-      }`}
+      className={`group bg-white rounded-3xl overflow-hidden border transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md flex flex-col cursor-pointer relative ${isHovered ? 'border-[#FF385C]' : 'border-gray-200 hover:border-gray-300'
+        }`}
       onMouseEnter={() => {
         setHoveredCardId(stay.id || null);
         setLoadAll(true);
@@ -84,14 +83,13 @@ const StayCard: React.FC<StayCardProps> = ({
               key={i}
               src={imgUrl}
               alt={`${stay.title} - ${i + 1}`}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${
-                activeImageIndex === i ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              } transition-transform duration-500 group-hover:scale-[1.02]`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${activeImageIndex === i ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                } transition-transform duration-500 group-hover:scale-[1.02]`}
               loading={i === 0 ? "eager" : "lazy"}
             />
           );
         })}
-        
+
         {/* Navigation Arrows */}
         {imagesList.length > 1 && (
           <>
@@ -114,11 +112,10 @@ const StayCard: React.FC<StayCardProps> = ({
         {imagesList.length > 1 && (
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-10 bg-black/10 px-2 py-0.5 rounded-full">
             {imagesList.map((_, i) => (
-              <span 
-                key={i} 
-                className={`w-1.5 h-1.5 rounded-full transition-all ${
-                  activeImageIndex === i ? 'bg-white scale-110' : 'bg-white/50'
-                }`}
+              <span
+                key={i}
+                className={`w-1.5 h-1.5 rounded-full transition-all ${activeImageIndex === i ? 'bg-white scale-110' : 'bg-white/50'
+                  }`}
               />
             ))}
           </div>
@@ -195,11 +192,10 @@ const StayCard: React.FC<StayCardProps> = ({
               e.stopPropagation();
               toggleCompare(stay);
             }}
-            className={`flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest py-1.5 px-3 rounded-full border transition-all cursor-pointer ${
-              compared 
-                ? 'bg-[#FF385C] text-white border-[#FF385C]' 
+            className={`flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest py-1.5 px-3 rounded-full border transition-all cursor-pointer ${compared
+                ? 'bg-[#FF385C] text-white border-[#FF385C]'
                 : 'bg-white text-gray-600 border-gray-200 hover:bg-rose-50/30 hover:text-[#FF385C] hover:border-[#FF385C]/30'
-            }`}
+              }`}
           >
             <GitCompare className="w-3.5 h-3.5" />
             <span>{compared ? 'Comparing' : 'Compare'}</span>
@@ -220,7 +216,7 @@ const StayCard: React.FC<StayCardProps> = ({
 function getPropertyLatLng(property: Property, index: number): [number, number] {
   const loc = property.location.toLowerCase();
   let baseCoords: [number, number] = [19.0760, 72.8777]; // Default to Mumbai/Maharashtra center
-  
+
   if (loc.includes('kelva') || loc.includes('palghar')) {
     baseCoords = [19.6200, 72.7300];
   } else if (loc.includes('lonavala') || loc.includes('khandala') || loc.includes('tungarli')) {
@@ -234,7 +230,7 @@ function getPropertyLatLng(property: Property, index: number): [number, number] 
   } else if (loc.includes('jawhar')) {
     baseCoords = [19.9055, 73.2284];
   }
-  
+
   // Apply a small index-based jitter to avoid overlapping resort markers
   const jitterLat = ((index * 17) % 100 - 50) * 0.0003;
   const jitterLng = ((index * 23) % 100 - 50) * 0.0003;
@@ -247,7 +243,7 @@ export default function SearchResults() {
   const dest = searchParams.get('dest') || '';
   const typeFilter = searchParams.get('type') || '';
   const { toggleFavorite, isFavorite, compareList, toggleCompare, isComparing, clearCompare } = useUser();
-  
+
   const [allStays, setAllStays] = useState<Property[]>(() => propertyService.getLocalPropertiesSync());
   const [loading, setLoading] = useState(() => propertyService.getLocalPropertiesSync().length === 0);
   const [sortBy, setSortBy] = useState('default');
@@ -264,7 +260,7 @@ export default function SearchResults() {
 
   // Advanced Filters Drawer Toggle
   const [showAdvancedDrawer, setShowAdvancedDrawer] = useState(false);
-  
+
   // Advanced Drawer Filter States
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
@@ -274,86 +270,73 @@ export default function SearchResults() {
   // Compare slide-up overlay (expanded status on desktop)
   const [isCompareExpanded, setIsCompareExpanded] = useState(false);
 
-  // Map Controls
-  const [mapExpanded, setMapExpanded] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
-
-  // Mobile navigation support
-  const [showMapViewOnMobile, setShowMapViewOnMobile] = useState(false);
-
-  // Map Query state to center on destination or clicked property
-  const [mapQuery, setMapQuery] = useState(dest || 'Maharashtra, India');
-
-  // Leaflet references
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>(null);
-  const markersGroupRef = useRef<any>(null);
 
   // Compile final filter set
   const filteredStays = allStays.filter((stay) => {
     // Destination match
-    const matchesDest = !dest || 
-      stay.location.toLowerCase().includes(dest.toLowerCase()) || 
-      stay.title.toLowerCase().includes(dest.toLowerCase()) || 
+    const matchesDest = !dest ||
+      stay.location.toLowerCase().includes(dest.toLowerCase()) ||
+      stay.title.toLowerCase().includes(dest.toLowerCase()) ||
       (stay.type && stay.type.toLowerCase().includes(dest.toLowerCase()));
-      
+
     // Category Chip match
-    const matchesChip = !activeChip || activeChip === 'All' || 
-      (stay.type && stay.type.toLowerCase().includes(activeChip.toLowerCase())) || 
+    const matchesChip = !activeChip || activeChip === 'All' ||
+      (stay.type && stay.type.toLowerCase().includes(activeChip.toLowerCase())) ||
       (stay.title && stay.title.toLowerCase().includes(activeChip.toLowerCase()));
 
     // Sticky Top Filters
     const matchesPrice = stay.price <= maxPrice;
     const matchesGuests = !guestsCount || (stay.maxGuests || 4) >= guestsCount;
-    
-    const matchesPool = !poolFilter || 
-      stay.amenities.some(a => a.toLowerCase().includes('pool')) || 
+
+    const matchesPool = !poolFilter ||
+      stay.amenities.some(a => a.toLowerCase().includes('pool')) ||
       stay.description.toLowerCase().includes('pool');
-      
-    const matchesFood = !foodFilter || 
+
+    const matchesFood = !foodFilter ||
       stay.amenities.some(a => a.toLowerCase().includes('food') || a.toLowerCase().includes('restaurant') || a.toLowerCase().includes('meal') || a.toLowerCase().includes('breakfast')) ||
       stay.description.toLowerCase().includes('food') || stay.description.toLowerCase().includes('meal');
-      
-    const matchesPet = !petFilter || 
-      stay.description.toLowerCase().includes('pet') || 
+
+    const matchesPet = !petFilter ||
+      stay.description.toLowerCase().includes('pet') ||
       stay.description.toLowerCase().includes('animal');
-      
-    const matchesBeachfront = !beachfrontFilter || 
-      stay.amenities.some(a => a.toLowerCase().includes('beach')) || 
-      stay.description.toLowerCase().includes('beach') || 
+
+    const matchesBeachfront = !beachfrontFilter ||
+      stay.amenities.some(a => a.toLowerCase().includes('beach')) ||
+      stay.description.toLowerCase().includes('beach') ||
       (stay.type && stay.type.toLowerCase().includes('beach'));
 
     const matchesInstant = !instantBookFilter || stay.availability === true;
 
     // Advanced Drawer Filters
-    const matchesTypes = selectedTypes.length === 0 || 
+    const matchesTypes = selectedTypes.length === 0 ||
       (stay.type && selectedTypes.some(t => stay.type?.toLowerCase().includes(t.toLowerCase())));
-      
-    const matchesRatings = selectedRatings.length === 0 || 
+
+    const matchesRatings = selectedRatings.length === 0 ||
       selectedRatings.some(r => (stay.rating || 4.5) >= r);
 
     const matchesFeatured = !isFeaturedOnly || stay.isFeatured === true;
-    
-    const matchesCouple = !isCoupleFriendly || 
-      stay.amenities.some(a => a.toLowerCase().includes('couple')) || 
+
+    const matchesCouple = !isCoupleFriendly ||
+      stay.amenities.some(a => a.toLowerCase().includes('couple')) ||
       stay.description.toLowerCase().includes('couple') ||
       stay.description.toLowerCase().includes('romantic');
 
-    return matchesDest && matchesChip && matchesPrice && matchesGuests && matchesPool && 
-           matchesFood && matchesPet && matchesBeachfront && matchesInstant && 
-           matchesTypes && matchesRatings && matchesFeatured && matchesCouple;
+    return matchesDest && matchesChip && matchesPrice && matchesGuests && matchesPool &&
+      matchesFood && matchesPet && matchesBeachfront && matchesInstant &&
+      matchesTypes && matchesRatings && matchesFeatured && matchesCouple;
   }).sort((a, b) => {
     if (sortBy === 'price-asc') return a.price - b.price;
     if (sortBy === 'price-desc') return b.price - a.price;
     if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
-    
+
     // Sort by default order: Coconut Valley -> Raj Resort -> Betel Leaf Resort -> others
     const orderedTitles = ['coconut valley', 'raj resort', 'betel leaf'];
     const aTitle = a.title.toLowerCase();
     const bTitle = b.title.toLowerCase();
     const aIdx = orderedTitles.findIndex(title => aTitle.includes(title));
     const bIdx = orderedTitles.findIndex(title => bTitle.includes(title));
-    
+
     if (aIdx !== -1 && bIdx !== -1) {
       return aIdx - bIdx;
     }
@@ -384,174 +367,21 @@ export default function SearchResults() {
     setActiveChip(typeFilter);
   }, [typeFilter]);
 
-  // Sync mapQuery with dest parameter from search bar
-  useEffect(() => {
-    setMapQuery(dest || 'Maharashtra, India');
-  }, [dest]);
-
-  // Initialize Leaflet Map
-  useEffect(() => {
-    const L = (window as any).L;
-    if (!L || !mapContainerRef.current) return;
-
-    if (!mapInstanceRef.current) {
-      mapInstanceRef.current = L.map(mapContainerRef.current, {
-        zoomControl: true,
-        scrollWheelZoom: true,
-      }).setView([19.0760, 72.8777], 9);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(mapInstanceRef.current);
-
-      markersGroupRef.current = L.layerGroup().addTo(mapInstanceRef.current);
-    }
-
-    return () => {
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
-        mapInstanceRef.current = null;
-      }
-    };
-  }, []);
-
-  // Sync Leaflet markers and bounds when stays/filters change
-  useEffect(() => {
-    const L = (window as any).L;
-    if (!L || !mapInstanceRef.current || !markersGroupRef.current) return;
-
-    // Clear existing markers
-    markersGroupRef.current.clearLayers();
-
-    if (filteredStays.length === 0) {
-      const loc = dest.toLowerCase();
-      let coords: [number, number] = [19.0760, 72.8777];
-      let zoom = 9;
-      
-      if (loc.includes('kelva') || loc.includes('palghar')) {
-        coords = [19.6200, 72.7300];
-        zoom = 12;
-      } else if (loc.includes('lonavala') || loc.includes('khandala') || loc.includes('tungarli')) {
-        coords = [18.7500, 73.4000];
-        zoom = 12;
-      } else if (loc.includes('alibaug')) {
-        coords = [18.6582, 72.8777];
-        zoom = 12;
-      } else if (loc.includes('karjat')) {
-        coords = [18.9102, 73.3282];
-        zoom = 12;
-      } else if (loc.includes('igatpuri')) {
-        coords = [19.6924, 73.5565];
-        zoom = 12;
-      } else if (loc.includes('jawhar')) {
-        coords = [19.9055, 73.2284];
-        zoom = 12;
-      }
-      mapInstanceRef.current.setView(coords, zoom);
-      return;
-    }
-
-    const bounds = L.latLngBounds([]);
-
-    filteredStays.forEach((stay, index) => {
-      const coords = getPropertyLatLng(stay, index);
-
-      // Create a premium looking custom div icon matching the Airbnb/StaySearch color palette
-      const customIcon = L.divIcon({
-        html: `<div class="bg-white hover:bg-[#FF385C] hover:text-white text-[#222222] font-black text-[10px] px-2.5 py-1.5 rounded-full border border-gray-200 shadow-md transition-all duration-150 transform hover:scale-105 whitespace-nowrap">₹${stay.price.toLocaleString('en-IN')}</div>`,
-        className: 'custom-leaflet-pin',
-        iconSize: [60, 24],
-        iconAnchor: [30, 12]
-      });
-
-      const marker = L.marker(coords, { icon: customIcon });
-
-      const popupContent = `
-        <div style="font-family: 'Inter', sans-serif; width: 200px; text-align: left;">
-          <div style="width: 100%; height: 100px; border-radius: 12px; overflow: hidden; margin-bottom: 8px;">
-            <img src="${stay.images?.[0] || 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=600&auto=format&fit=crop'}" style="width: 100%; height: 100%; object-fit: cover;" />
-          </div>
-          <h4 style="margin: 0 0 4px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #222222; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${stay.title}</h4>
-          <div style="font-size: 11px; font-weight: bold; color: #FF385C; margin-bottom: 6px;">★ ${stay.rating || '4.5'}</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f3f4f6; padding-top: 6px;">
-            <span style="font-size: 12px; font-weight: 900; color: #222222;">₹${stay.price.toLocaleString('en-IN')} <span style="font-size: 9px; color: #9ca3af; font-weight: normal;">/ night</span></span>
-            <a href="/property/${stay.id}" style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #2563eb; text-decoration: none;">Details &rarr;</a>
-          </div>
-        </div>
-      `;
-
-      marker.bindPopup(popupContent, {
-        closeButton: true,
-        className: 'custom-leaflet-popup'
-      });
-
-      markersGroupRef.current.addLayer(marker);
-      bounds.extend(coords);
-    });
-
-    // Fit map bounds to contain all markers
-    mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
-  }, [filteredStays]);
-
-
-
   const chips = ['All', 'Beach', 'Hills', 'Farm', 'Luxury', 'Budget', 'Family'];
 
-
   const handleCardClick = (stay: Property) => {
-    // On mobile devices, navigate directly to details page
-    if (window.innerWidth < 1024) {
-      navigate(`/property/${stay.id}`);
-      return;
-    }
-
-    const L = (window as any).L;
-    if (!L) {
-      navigate(`/property/${stay.id}`);
-      return;
-    }
-    const idx = allStays.findIndex(s => s.id === stay.id);
-    const coords = getPropertyLatLng(stay, idx !== -1 ? idx : 0);
-    
-    if (mapInstanceRef.current && markersGroupRef.current) {
-      mapInstanceRef.current.setView(coords, 14, { animate: true, duration: 1 });
-      
-      // Find the corresponding marker and open its popup
-      markersGroupRef.current.eachLayer((layer: any) => {
-        if (layer.getLatLng) {
-          const latLng = layer.getLatLng();
-          const dist = Math.sqrt(Math.pow(latLng.lat - coords[0], 2) + Math.pow(latLng.lng - coords[1], 2));
-          if (dist < 0.0001) {
-            layer.openPopup();
-          }
-        }
-      });
-    }
-  };
-
-  const handleRecenter = () => {
-    if (mapInstanceRef.current && markersGroupRef.current && filteredStays.length > 0) {
-      const L = (window as any).L;
-      if (!L) return;
-      const bounds = L.latLngBounds([]);
-      filteredStays.forEach((stay, idx) => {
-        bounds.extend(getPropertyLatLng(stay, idx));
-      });
-      mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
-    } else if (mapInstanceRef.current) {
-      mapInstanceRef.current.setView([19.0760, 72.8777], 9);
-    }
+    navigate(`/property/${stay.id}`);
   };
 
 
   const toggleTypeFilter = (type: string) => {
-    setSelectedTypes(prev => 
+    setSelectedTypes(prev =>
       prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
     );
   };
 
   const toggleRatingFilter = (rating: number) => {
-    setSelectedRatings(prev => 
+    setSelectedRatings(prev =>
       prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
     );
   };
@@ -573,10 +403,10 @@ export default function SearchResults() {
 
   return (
     <div className="pt-20 h-screen flex flex-col overflow-hidden bg-[#fafafa]">
-      
+
       {/* 1. Top Sticky Filters bar */}
       <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between gap-4 z-20 shadow-sm shrink-0">
-        
+
         {/* Left Search Header */}
         <div className="hidden md:flex flex-col">
           <h1 className="text-lg font-black tracking-tight text-[#222222] flex items-center gap-1.5">
@@ -633,11 +463,10 @@ export default function SearchResults() {
             <button
               key={item.label}
               onClick={() => item.onChange(!item.checked)}
-              className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border shrink-0 cursor-pointer ${
-                item.checked
+              className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border shrink-0 cursor-pointer ${item.checked
                   ? 'bg-[#FF385C] text-white border-[#FF385C] shadow-md shadow-[#FF385C]/10'
                   : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-50'
-              }`}
+                }`}
             >
               {item.label}
             </button>
@@ -669,12 +498,10 @@ export default function SearchResults() {
 
       {/* 2. Main split section */}
       <div className="flex-grow flex relative overflow-hidden">
-        
+
         {/* Left pane: Results list */}
-        <div 
-          className={`h-full overflow-y-auto px-6 py-6 transition-all duration-300 ${
-            mapExpanded ? 'w-full lg:w-1/2' : 'w-full lg:w-2/3'
-          } ${showMapViewOnMobile ? 'hidden lg:block' : 'block'}`}
+        <div
+          className="h-full overflow-y-auto px-6 py-6 w-full"
         >
           {/* Quick Chips bar */}
           <div className="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-none shrink-0 border-b border-gray-100">
@@ -690,11 +517,10 @@ export default function SearchResults() {
                     return prev;
                   });
                 }}
-                className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border shrink-0 ${
-                  (chip === 'All' && !activeChip) || activeChip === chip
+                className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border shrink-0 ${(chip === 'All' && !activeChip) || activeChip === chip
                     ? 'bg-[#FF385C] text-white border-[#FF385C] shadow-md shadow-[#FF385C]/15'
                     : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-50'
-                }`}
+                  }`}
               >
                 {chip}
               </button>
@@ -707,7 +533,7 @@ export default function SearchResults() {
               <p className="text-sm font-semibold text-gray-500 font-sans">Curating comparing stays...</p>
             </div>
           ) : filteredStays.length > 0 ? (
-            <div className={`grid gap-5 pb-24 ${mapExpanded ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
+            <div className="grid gap-5 pb-24 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {filteredStays.map((stay, idx) => (
                 <StayCard
                   key={stay.id}
@@ -742,51 +568,6 @@ export default function SearchResults() {
           )}
         </div>
 
-        {/* Right pane: Sticky Map / Mini Map sidebar */}
-        <div 
-          className={`h-full sticky top-0 transition-all duration-300 ${
-            mapExpanded ? 'w-full lg:w-1/2 border-l border-gray-200' : 'w-full lg:w-1/3'
-          } ${showMapViewOnMobile ? 'block' : 'hidden lg:block'} p-5`}
-        >
-          <div className="h-full flex flex-col gap-4">
-            
-            {/* Expanded / Sticky layout control header */}
-            <div className="flex items-center justify-between shrink-0 bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
-              <span className="text-xs font-extrabold text-[#222222] uppercase tracking-wider flex items-center gap-1">
-                <MapPin className="w-4 h-4 text-[#FF385C]" />
-                Maharashtra Stays Map
-              </span>
-              <button
-                onClick={() => setMapExpanded(!mapExpanded)}
-                className="hidden lg:inline-flex text-[10px] font-extrabold uppercase tracking-widest text-[#FF385C] hover:text-[#FF385C] border border-rose-200 hover:border-rose-500/40 bg-rose-50 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
-              >
-                {mapExpanded ? 'Contract Layout' : 'Expand Split Map'}
-              </button>
-            </div>
-
-            {/* Map wrapper frame */}
-            <div className="flex-grow rounded-[2rem] border border-gray-200 shadow-md relative overflow-hidden bg-[#f4f3f0]">
-              {/* Actual Map Widget */}
-              <div
-                ref={mapContainerRef}
-                className="w-full h-full rounded-[2rem] z-0"
-              />
-
-              {/* Floating map controls with frosted glass styling */}
-              <div className="absolute bottom-4 right-4 z-10">
-                <button
-                  onClick={handleRecenter}
-                  className="bg-white/95 hover:bg-white text-gray-800 text-[10px] font-extrabold uppercase tracking-widest px-4 py-2.5 rounded-xl border border-gray-200 shadow-lg transition-all flex items-center gap-1.5 backdrop-blur-sm cursor-pointer select-none"
-                >
-                  <Navigation className="w-3.5 h-3.5 text-[#FF385C]" />
-                  <span>Recenter Map</span>
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
       </div>
 
       {/* 3. Desktop Bottom sticky Compare Panel launcher */}
@@ -810,8 +591,8 @@ export default function SearchResults() {
               <div className="flex items-center gap-3">
                 {compareList.map(item => (
                   <div key={item.id} className="flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-2xl relative">
-                    <button 
-                      onClick={() => toggleCompare(item)} 
+                    <button
+                      onClick={() => toggleCompare(item)}
                       className="absolute -top-1.5 -right-1.5 p-0.5 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors border border-white shadow"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -887,10 +668,10 @@ export default function SearchResults() {
                   {compareList.map((item, idx) => {
                     const priceText = `₹${item.price.toLocaleString('en-IN')}`;
                     const hasPool = item.amenities.some(a => a.toLowerCase().includes('pool'));
-                    
+
                     return (
                       <div key={item.id} className="flex flex-col gap-6 border border-gray-100 hover:border-rose-300 p-4 rounded-3xl transition-all text-center relative group">
-                        
+
                         {/* Remove button */}
                         <button
                           onClick={() => toggleCompare(item)}
@@ -979,7 +760,7 @@ export default function SearchResults() {
         {showAdvancedDrawer && (
           <div className="fixed inset-0 z-50 flex justify-end bg-black/50 backdrop-blur-sm">
             <div className="absolute inset-0 z-0" onClick={() => setShowAdvancedDrawer(false)} />
-            
+
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -993,7 +774,7 @@ export default function SearchResults() {
                   <SlidersHorizontal className="w-5 h-5 text-[#FF385C]" />
                   Advanced Filters
                 </h3>
-                <button 
+                <button
                   onClick={() => setShowAdvancedDrawer(false)}
                   className="p-1.5 bg-[#222222]/5 hover:bg-[#222222]/10 text-[#222222] rounded-full transition-colors"
                 >
@@ -1003,7 +784,7 @@ export default function SearchResults() {
 
               {/* Drawer Body Scroll */}
               <div className="flex-grow overflow-y-auto px-6 py-6 space-y-8">
-                
+
                 {/* Stay Type */}
                 <div>
                   <h4 className="font-black text-[#222222] text-xs uppercase tracking-widest mb-4">Stay Type</h4>
@@ -1014,11 +795,10 @@ export default function SearchResults() {
                         <button
                           key={type}
                           onClick={() => toggleTypeFilter(type)}
-                          className={`px-4 py-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
-                            checked
+                          className={`px-4 py-2.5 rounded-xl border text-xs font-bold text-left transition-all ${checked
                               ? 'border-[#FF385C] bg-rose-50 text-[#FF385C]'
                               : 'border-gray-200 text-[#222222] hover:bg-gray-50'
-                          }`}
+                            }`}
                         >
                           {type}
                         </button>
@@ -1037,11 +817,10 @@ export default function SearchResults() {
                         <button
                           key={rating}
                           onClick={() => toggleRatingFilter(rating)}
-                          className={`flex-grow px-3 py-2 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1 ${
-                            checked
+                          className={`flex-grow px-3 py-2 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1 ${checked
                               ? 'border-[#FF385C] bg-rose-50 text-[#FF385C]'
                               : 'border-gray-200 text-[#222222] hover:bg-gray-50'
-                          }`}
+                            }`}
                         >
                           <Star className="w-3.5 h-3.5 fill-amber-500 stroke-amber-500" />
                           <span>{rating}+</span>
@@ -1113,21 +892,19 @@ export default function SearchResults() {
       <div className="lg:hidden fixed bottom-16 left-1/2 -translate-x-1/2 z-30 flex bg-[#222222]/95 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-1 shrink-0 mb-2">
         <button
           onClick={() => setShowMapViewOnMobile(false)}
-          className={`px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition-all ${
-            !showMapViewOnMobile 
-              ? 'bg-[#FF385C] text-white shadow-lg shadow-rose-500/20' 
+          className={`px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition-all ${!showMapViewOnMobile
+              ? 'bg-[#FF385C] text-white shadow-lg shadow-rose-500/20'
               : 'text-white/70 hover:text-white'
-          }`}
+            }`}
         >
           List view
         </button>
         <button
           onClick={() => setShowMapViewOnMobile(true)}
-          className={`px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition-all ${
-            showMapViewOnMobile 
-              ? 'bg-[#FF385C] text-white shadow-lg shadow-rose-500/20' 
+          className={`px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition-all ${showMapViewOnMobile
+              ? 'bg-[#FF385C] text-white shadow-lg shadow-rose-500/20'
               : 'text-white/70 hover:text-white'
-          }`}
+            }`}
         >
           Map view
         </button>
