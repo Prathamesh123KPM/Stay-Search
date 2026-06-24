@@ -71,11 +71,34 @@ export default function PropertyDetails() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const isProgrammaticScroll = React.useRef(false);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (isProgrammaticScroll.current) return;
     const container = e.currentTarget;
     const index = Math.round(container.scrollLeft / container.clientWidth);
     setActiveImageIndex(index);
+  };
+
+  const scrollToSlide = (index: number) => {
+    const container = document.getElementById('mobile-image-slider');
+    if (container) {
+      isProgrammaticScroll.current = true;
+      setActiveImageIndex(index);
+      
+      // Temporarily disable scroll snap to prevent Safari programmatic scroll bugs
+      container.style.scrollSnapType = 'none';
+      
+      container.scrollTo({
+        left: container.clientWidth * index,
+        behavior: 'smooth'
+      });
+      
+      setTimeout(() => {
+        container.style.scrollSnapType = 'x mandatory';
+        isProgrammaticScroll.current = false;
+      }, 500);
+    }
   };
 
   const handleWhatsAppBooking = () => {
@@ -197,13 +220,13 @@ export default function PropertyDetails() {
               <div 
                 id="mobile-image-slider"
                 onScroll={handleScroll}
-                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none h-[40vh] gap-3 rounded-3xl"
+                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none aspect-[16/10] rounded-3xl"
                 style={{
                   msOverflowStyle: 'none',
                   scrollbarWidth: 'none',
                 }}
               >
-                {displayImages.map((img, idx) => (
+                {galleryImages.map((img, idx) => (
                   <div key={idx} className="min-w-full h-full snap-start relative flex-shrink-0 rounded-3xl overflow-hidden border border-gray-200 shadow-md">
                     <img src={img} alt={`${property.title} - ${idx + 1}`} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/40 via-transparent to-transparent pointer-events-none" />
@@ -212,59 +235,33 @@ export default function PropertyDetails() {
               </div>
               
               {/* Dot Indicators */}
-              {displayImages.length > 1 && (
+              {galleryImages.length > 1 && (
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
-                  {displayImages.map((_, idx) => (
+                  {galleryImages.map((_, idx) => (
                     <button
                       key={idx}
-                      onClick={() => {
-                        const container = document.getElementById('mobile-image-slider');
-                        if (container) {
-                          container.scrollTo({
-                            left: container.clientWidth * idx,
-                            behavior: 'smooth'
-                          });
-                        }
-                      }}
+                      onClick={() => scrollToSlide(idx)}
                       className={`h-1.5 rounded-full transition-all duration-300 ${activeImageIndex === idx ? 'bg-[#FF385C] w-3' : 'bg-emerald-950/25 w-1.5'}`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
                   ))}
                 </div>
               )}
-
+  
               {/* Arrow Buttons */}
-              {displayImages.length > 1 && (
+              {galleryImages.length > 1 && (
                 <>
                   <button
-                    onClick={() => {
-                      const container = document.getElementById('mobile-image-slider');
-                      if (container) {
-                        const nextIndex = Math.max(0, activeImageIndex - 1);
-                        container.scrollTo({
-                          left: container.clientWidth * nextIndex,
-                          behavior: 'smooth'
-                        });
-                      }
-                    }}
+                    onClick={() => scrollToSlide(Math.max(0, activeImageIndex - 1))}
                     disabled={activeImageIndex === 0}
                     className={`absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-gray-200 flex items-center justify-center text-[#222222] transition-opacity ${activeImageIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button
-                    onClick={() => {
-                      const container = document.getElementById('mobile-image-slider');
-                      if (container) {
-                        const nextIndex = Math.min(displayImages.length - 1, activeImageIndex + 1);
-                        container.scrollTo({
-                          left: container.clientWidth * nextIndex,
-                          behavior: 'smooth'
-                        });
-                      }
-                    }}
-                    disabled={activeImageIndex === displayImages.length - 1}
-                    className={`absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-gray-200 flex items-center justify-center text-[#222222] transition-opacity ${activeImageIndex === displayImages.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                    onClick={() => scrollToSlide(Math.min(galleryImages.length - 1, activeImageIndex + 1))}
+                    disabled={activeImageIndex === galleryImages.length - 1}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-gray-200 flex items-center justify-center text-[#222222] transition-opacity ${activeImageIndex === galleryImages.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -272,20 +269,37 @@ export default function PropertyDetails() {
               )}
             </div>
 
+            {/* Mobile Thumbnail Strip - Shows all 5 images at once */}
+            {galleryImages.length > 1 && (
+              <div className="flex md:hidden gap-2 overflow-x-auto py-2 px-1 scrollbar-none mt-2 justify-center shrink-0">
+                {galleryImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => scrollToSlide(idx)}
+                    className={`w-14 h-11 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all cursor-pointer ${
+                      activeImageIndex === idx ? 'border-[#FF385C] scale-105 shadow-sm' : 'border-gray-250/60 opacity-60'
+                    }`}
+                  >
+                    <img src={img} className="w-full h-full object-cover" alt={`Thumbnail ${idx + 1}`} />
+                  </button>
+                ))}
+              </div>
+            )}
+ 
             {/* Desktop Image Gallery */}
             <div className="hidden md:grid md:grid-cols-4 gap-4 mb-12 h-[60vh]">
               <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden relative group border border-gray-200 shadow-md">
-                <img src={property.images?.[0] || 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop'} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={galleryImages[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/30 to-transparent pointer-events-none" />
               </div>
               <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
-                <img src={property.images?.[1] || 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={galleryImages[1]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
-                <img src={property.images?.[2] || 'https://images.unsplash.com/photo-1584132967334-10e028b03046?q=80&w=800&auto=format&fit=crop'} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={galleryImages[2]} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="md:col-span-2 rounded-3xl overflow-hidden relative group hidden md:block border border-gray-200 shadow-md">
-                <img src={property.images?.[3] || 'https://images.unsplash.com/photo-1540541338272-34b95baf892a?q=80&w=800&auto=format&fit=crop'} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={galleryImages[3]} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
                   <button className="bg-white/20 text-white border border-white/30 px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white/30 transition-colors shadow-lg">
                     View all photos
