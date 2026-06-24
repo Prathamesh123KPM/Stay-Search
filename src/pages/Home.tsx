@@ -1,7 +1,6 @@
 import React from 'react';
 import Hero from './HomeSections/Hero';
 import TrustSection from './HomeSections/TrustSection';
-import AiPlannerBanner from './HomeSections/AiPlannerBanner';
 import FeaturedStays from './HomeSections/FeaturedStays';
 import LonavalaStays from './HomeSections/LonavalaStays';
 import Reviews from './HomeSections/Reviews';
@@ -18,8 +17,6 @@ export default function Home() {
       <FeaturedStays />
       {/* Popular stays in Lonavala */}
       <LonavalaStays />
-      {/* 4. AI Itinerary Planner Banner */}
-      <AiPlannerBanner />
       {/* 10. Reviews - Social proof */}
       <Reviews />
       {/* 11. WhatsApp CTA - Floating inquiry button */}

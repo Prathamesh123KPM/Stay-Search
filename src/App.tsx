@@ -9,7 +9,6 @@ import Dashboard from "./pages/Dashboard";
 import Destinations from "./pages/Destinations";
 import PremiumStays from "./pages/PremiumStays";
 import CompareResorts from "./pages/CompareResorts";
-import ItineraryPlanner from "./pages/ItineraryPlanner";
 import Support from "./pages/Support";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -38,7 +37,6 @@ function AppContent() {
           <Route path="/destinations" element={<Destinations />} />
           <Route path="/premium-stays" element={<PremiumStays />} />
           <Route path="/compare" element={<CompareResorts />} />
-          <Route path="/itinerary" element={<ItineraryPlanner />} />
           <Route path="/support" element={<Support />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />

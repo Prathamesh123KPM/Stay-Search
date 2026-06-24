@@ -73,12 +73,6 @@ export default function Experiences() {
              </div>
            ))}
          </div>
-         
-         <div className="mt-16 text-center">
-            <button className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-colors shadow-lg shadow-white/5">
-                Request Custom Itinerary
-            </button>
-         </div>
        </div>
     </div>
   );

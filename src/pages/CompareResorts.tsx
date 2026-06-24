@@ -42,21 +42,28 @@ export default function CompareResorts() {
         </div>
 
         {compareList.length > 0 ? (
-          <div className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6 overflow-x-auto">
+          <div className="bg-white rounded-2xl md:rounded-3xl border border-gray-200 shadow-sm p-4 md:p-6 overflow-x-auto scrollbar-thin">
             {/* Table layout / Side by side grid */}
-            <div className="min-w-[800px] grid grid-cols-4 gap-6">
+            <div className="min-w-[720px] md:min-w-[800px] grid grid-cols-4 gap-4 md:gap-6 relative">
               
               {/* Columns Header Names */}
-              <div className="flex flex-col gap-6 pt-48 font-bold text-xs text-gray-400 uppercase tracking-widest border-r border-gray-100 pr-4">
-                <div className="h-10 flex items-center">Price per night</div>
-                <div className="h-10 flex items-center">Property Type</div>
-                <div className="h-10 flex items-center">Star Rating</div>
-                <div className="h-10 flex items-center">Capacity limit</div>
-                <div className="h-10 flex items-center">BR / BA Configuration</div>
-                <div className="h-10 flex items-center">Swimming Pool</div>
-                <div className="h-10 flex items-center">Included Food</div>
-                <div className="h-28 flex items-start pt-2">Key Amenities</div>
-                <div className="h-28 flex items-end justify-start">Actions</div>
+              <div className="flex flex-col gap-6 font-bold text-[10px] md:text-xs text-gray-400 uppercase tracking-widest border-r border-gray-100 pr-4 sticky left-0 bg-white z-20 shadow-[8px_0_12px_-6px_rgba(0,0,0,0.08)] select-none">
+                {/* Top header corner block matching the thumbnails height */}
+                <div className="h-[160px] flex flex-col justify-end pb-3 border-b border-gray-100 bg-white">
+                  <div className="bg-rose-50 text-[#FF385C] border border-rose-100 rounded-lg py-1 px-2.5 w-max mb-1 text-[8px] md:text-[9px] font-black">
+                    {compareList.length}/3 STAYS
+                  </div>
+                  <span className="text-[9px] md:text-[10px] font-black text-gray-900 normal-case leading-tight block">Specs Comparison</span>
+                </div>
+                <div className="h-10 flex items-center bg-white">Price per night</div>
+                <div className="h-10 flex items-center bg-white">Property Type</div>
+                <div className="h-10 flex items-center bg-white">Star Rating</div>
+                <div className="h-10 flex items-center bg-white">Capacity limit</div>
+                <div className="h-10 flex items-center bg-white">BR / BA Configuration</div>
+                <div className="h-10 flex items-center bg-white">Swimming Pool</div>
+                <div className="h-10 flex items-center bg-white">Included Food</div>
+                <div className="h-28 flex items-start pt-2 bg-white">Key Amenities</div>
+                <div className="h-28 flex items-end justify-start bg-white">Actions</div>
               </div>
 
               {/* Compared properties */}
@@ -172,15 +179,19 @@ export default function CompareResorts() {
 
               {/* Placeholders for remaining slots */}
               {Array.from({ length: Math.max(0, 3 - compareList.length) }).map((_, i) => (
-                <div key={i} className="flex flex-col items-center justify-center border border-dashed border-gray-300 p-6 rounded-2xl h-full min-h-[500px] bg-gray-50/50">
-                  <div className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 mb-2">
+                <Link
+                  key={i}
+                  to="/search"
+                  className="flex flex-col items-center justify-center border border-dashed border-gray-300 hover:border-[#FF385C]/50 hover:bg-rose-50/5 p-6 rounded-2xl h-full min-h-[500px] bg-gray-50/50 transition-all group/btn text-center cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-white group-hover/btn:bg-[#FF385C]/10 border border-gray-200 group-hover/btn:border-[#FF385C]/20 flex items-center justify-center text-gray-400 group-hover/btn:text-[#FF385C] mb-2 transition-all">
                     <Plus className="w-5 h-5" />
                   </div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Add Stay to Compare</p>
-                  <Link to="/search" className="text-[9px] font-black text-[#FF385C] hover:underline uppercase mt-1.5">
+                  <p className="text-[10px] font-bold text-gray-400 group-hover/btn:text-[#FF385C] uppercase tracking-widest text-center transition-all">Add Stay to Compare</p>
+                  <span className="text-[9px] font-black text-[#FF385C] uppercase mt-1.5 group-hover/btn:underline">
                     Browse Stays
-                  </Link>
-                </div>
+                  </span>
+                </Link>
               ))}
 
             </div>

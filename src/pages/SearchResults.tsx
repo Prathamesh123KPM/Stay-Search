@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { 
   MapPin, Star, ShieldCheck, Heart, Search, Plus, Minus, 
   Layers, EyeOff, Navigation, X, Check, Filter, Compass, 
@@ -243,6 +243,7 @@ function getPropertyLatLng(property: Property, index: number): [number, number] 
 
 export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const dest = searchParams.get('dest') || '';
   const typeFilter = searchParams.get('type') || '';
   const { toggleFavorite, isFavorite, compareList, toggleCompare, isComparing, clearCompare } = useUser();
@@ -481,8 +482,17 @@ export default function SearchResults() {
 
 
   const handleCardClick = (stay: Property) => {
+    // On mobile devices, navigate directly to details page
+    if (window.innerWidth < 1024) {
+      navigate(`/property/${stay.id}`);
+      return;
+    }
+
     const L = (window as any).L;
-    if (!L) return;
+    if (!L) {
+      navigate(`/property/${stay.id}`);
+      return;
+    }
     const idx = allStays.findIndex(s => s.id === stay.id);
     const coords = getPropertyLatLng(stay, idx !== -1 ? idx : 0);
     
@@ -928,12 +938,17 @@ export default function SearchResults() {
                   })}
                   {/* Fill empty comparison columns */}
                   {Array.from({ length: Math.max(0, 3 - compareList.length) }).map((_, i) => (
-                    <div key={i} className="flex flex-col items-center justify-center border-2 border-dashed border-gray-200 p-6 rounded-3xl h-full min-h-[500px]">
-                      <div className="w-12 h-12 rounded-full bg-gray-100 border border-gray-100 flex items-center justify-center text-[#222222]/30 mb-2">
+                    <button
+                      key={i}
+                      onClick={() => setIsCompareExpanded(false)}
+                      className="flex flex-col items-center justify-center border-2 border-dashed border-gray-200 hover:border-[#FF385C]/50 hover:bg-rose-50/10 p-6 rounded-3xl h-full min-h-[500px] transition-all cursor-pointer group/btn"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gray-100 group-hover/btn:bg-[#FF385C]/10 border border-gray-100 group-hover/btn:border-[#FF385C]/20 flex items-center justify-center text-[#222222]/30 group-hover/btn:text-[#FF385C] mb-2 transition-all">
                         <Plus className="w-6 h-6" />
                       </div>
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest text-center">Add Stay to Compare</p>
-                    </div>
+                      <p className="text-xs font-bold text-gray-400 group-hover/btn:text-[#FF385C] uppercase tracking-widest text-center transition-all">Add Stay to Compare</p>
+                      <span className="text-[10px] text-gray-400 mt-1 font-medium">(Closes modal to select)</span>
+                    </button>
                   ))}
                 </div>
               </div>
