@@ -223,8 +223,8 @@ export default function FeaturedStays() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">Popular stays in Maharashtra</h2>
-            <p className="text-gray-500 text-xs mt-1">Handpicked resorts & villas with Guest Favourite ratings.</p>
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">Featured Resorts & Premium Stays in Maharashtra</h2>
+            <p className="text-gray-500 text-xs mt-1">Handpicked hotels, villas, and resorts near Mumbai & Pune with high ratings.</p>
           </div>
           <Link to="/search" className="text-xs font-bold text-[#FF385C] hover:underline flex items-center gap-1">
             Explore all stays &rarr;

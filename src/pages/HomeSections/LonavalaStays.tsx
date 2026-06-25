@@ -34,8 +34,8 @@ export default function LonavalaStays() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">Popular stays in Lonavala</h2>
-            <p className="text-gray-500 text-xs mt-1">Stunning getaways, cabins and luxury villas nestled in the hills.</p>
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">Popular Resorts & Luxury Villas in Lonavala</h2>
+            <p className="text-gray-500 text-xs mt-1">Stunning hill retreats, group farmhouses, and luxury villas with private pools.</p>
           </div>
           <Link to="/search?dest=Lonavala" className="text-xs font-bold text-[#FF385C] hover:underline flex items-center gap-1">
             Explore Lonavala stays &rarr;

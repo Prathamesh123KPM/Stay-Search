@@ -12,6 +12,7 @@ import { bookingService, Booking } from '../services/bookingService';
 import { seedDatabase } from '../scripts/seed';
 import { storage } from '../firebase/config';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import SEO from '../components/SEO';
 
 const AVAILABLE_AMENITIES = [
   'Free WiFi', 'Swimming Pool', 'AC', 'Parking', 'Restaurant', 
@@ -474,7 +475,14 @@ export default function AdminDashboard() {
 
   if (!isAdminAuthenticated) {
     return (
-      <div className="min-h-screen pt-36 pb-16 bg-[#fafafa] relative overflow-hidden flex flex-col items-center justify-center">
+      <>
+        <SEO
+          title="Admin Dashboard | StaySearch Portal"
+          description="Manage your bookings, properties, and payouts on StaySearch."
+          keywords="staysearch dashboard, resort manager portal, staysearch admin"
+          robots="noindex, nofollow"
+        />
+        <div className="min-h-screen pt-36 pb-16 bg-[#fafafa] relative overflow-hidden flex flex-col items-center justify-center">
         {/* Glow Effects */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] hidden" />
         
@@ -533,11 +541,18 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+      </>
     );
   }
 
   return (
     <>
+      <SEO
+        title="Admin Dashboard | StaySearch Portal"
+        description="Manage your bookings, properties, and payouts on StaySearch."
+        keywords="staysearch dashboard, resort manager portal, staysearch admin"
+        robots="noindex, nofollow"
+      />
       <div className="pt-36 min-h-screen relative overflow-hidden pb-16 bg-[#fafafa]">
         {/* Glow Effects */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] hidden" />

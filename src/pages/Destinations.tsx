@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { MapPin, ArrowRight, Search, Compass, X } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const destinations = [
   {
@@ -38,7 +39,7 @@ const destinations = [
   },
   {
     name: 'Igatpuri',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+    image: '/igatpuri.png',
     stays: 22,
     desc: 'Misty green mountain getaway surrounded by serene lakes and waterfalls.',
     tags: ['Monsoon', 'Lakes', 'Waterfalls', 'Vipassana'],
@@ -57,6 +58,19 @@ const destinations = [
 export default function Destinations() {
   const [searchQuery, setSearchQuery] = useState('');
 
+  const destinationsSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Trending Destinations in Maharashtra",
+    "description": "Top travel destinations and weekend getaways in Maharashtra featured on StaySearch.",
+    "itemListElement": destinations.map((dest, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": dest.name,
+      "description": dest.desc
+    }))
+  };
+
   const filteredDestinations = destinations.filter(dest => 
     dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     dest.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -65,6 +79,12 @@ export default function Destinations() {
 
   return (
     <div className="pt-28 min-h-screen relative overflow-hidden pb-24 bg-[#fafafa] font-sans">
+      <SEO
+        title="Top Travel Destinations & Weekend Getaways in Maharashtra | StaySearch"
+        description="Explore trending weekend getaways in Maharashtra. Find stays in Palghar, Lonavala, Alibaug, Mahabaleshwar, Igatpuri, Dahanu and book premium resorts."
+        keywords="top holiday destinations Maharashtra, places to visit near Mumbai, weekend getaways Pune, Alibaug resorts, Lonavala travel, Palghar beach stays, Mahabaleshwar strawberries, Igatpuri hill station"
+        schema={destinationsSchema}
+      />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 blur-[150px] rounded-full pointer-events-none z-0" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

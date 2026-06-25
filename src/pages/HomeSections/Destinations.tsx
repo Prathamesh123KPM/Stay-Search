@@ -8,7 +8,7 @@ const destinations = [
   { name: 'Lonavala', tagline: 'Hill Station Retreats', stays: 68, image: 'https://www.noblehousetours.com/wp-content/uploads/2025/08/Things-to-Do-in-Lonavala-The-Ultimate-Guide-for-First-Time-Visitors.jpg' },
   { name: 'Alibaug', tagline: 'Coastal Weekend Getaway', stays: 55, image: 'https://www.stayvista.com/blog/wp-content/uploads/2024/06/Anjarle_beach-1.jpg' },
   { name: 'Mahabaleshwar', tagline: 'Strawberry Valley Stays', stays: 38, image: 'https://s7ap1.scene7.com/is/image/incredibleindia/1-pratapgarh-fort-mahabaleshwar-maharashtra-2-city-hero?qlt=82&ts=1726668937680' },
-  { name: 'Igatpuri', tagline: 'Misty Mountain Resorts', stays: 22, image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
+  { name: 'Igatpuri', tagline: 'Misty Mountain Resorts', stays: 22, image: '/igatpuri.png' },
   { name: 'Dahanu', tagline: 'Chikoo Farm Homestays', stays: 30, image: 'https://exploredahanu.com/assets/image1/3.jpg' },
 ];
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Star, Check, X, GitCompare, Plus, Phone, Eye } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 import { propertyService, Property } from '../services/propertyService';
+import SEO from '../components/SEO';
 
 export default function CompareResorts() {
   const { compareList, toggleCompare, isComparing, clearCompare } = useUser();
@@ -27,6 +28,11 @@ export default function CompareResorts() {
 
   return (
     <div className="pt-28 min-h-screen relative overflow-hidden pb-24 bg-[#fafafa] font-sans">
+      <SEO
+        title="Compare Premium Resorts & Stays in Maharashtra | StaySearch"
+        description="Compare prices, amenities, location, ratings, and features of premium resorts and farmhouses in Maharashtra to choose the best stay."
+        keywords="compare resorts Maharashtra, resort comparison tool, hotel prices comparison, compare amenities resorts, best stays comparison"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}

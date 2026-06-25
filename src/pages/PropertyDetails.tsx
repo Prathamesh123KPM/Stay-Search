@@ -6,6 +6,7 @@ import { useUser } from '../context/UserContext';
 import { bookingService } from '../services/bookingService';
 import { paymentService } from '../services/paymentService';
 import { propertyService, Property } from '../services/propertyService';
+import SEO from '../components/SEO';
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -132,8 +133,57 @@ export default function PropertyDetails() {
   };
 
 
+  const seoTitle = property 
+    ? `${property.title} in ${property.location} | StaySearch` 
+    : loading 
+      ? "Loading Property... | StaySearch" 
+      : "Property Not Found | StaySearch";
+
+  const seoDescription = property
+    ? `Book ${property.title} in ${property.location}. ${property.description.slice(0, 150)}... Features: ${property.amenities.join(', ')}. Price starts at ₹${property.price}/night.`
+    : "Discover premium resorts, villas, and stays in Maharashtra on StaySearch.";
+
+  const seoKeywords = property
+    ? `${property.title}, resort in ${property.location}, stays in ${property.location}, book ${property.title}, staysearch ${property.location}, ${property.type || 'resort'} booking, amenities ${property.amenities.slice(0, 5).join(', ')}`
+    : "Maharashtra resorts, premium stays, book resorts";
+
+  const seoImage = property?.images?.[0] || 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop';
+
+  const hotelSchema = property ? {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "@id": `${window.location.origin}/property/${id}`,
+    "name": property.title,
+    "description": property.description,
+    "image": property.images || [],
+    "telephone": property.contactNumber || "+919987091858",
+    "priceRange": `₹${property.price} per night`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": property.location,
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    },
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": property.rating || 4.5
+    },
+    "amenityFeature": property.amenities.map(amenity => ({
+      "@type": "LocationFeatureSpecification",
+      "name": amenity,
+      "value": true
+    }))
+  } : undefined;
+
   return (
     <div className="pt-20 md:pt-28 min-h-screen relative overflow-hidden pb-24 md:pb-16 bg-gray-50">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        ogImage={seoImage}
+        schema={hotelSchema}
+      />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FF385C]/5 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] hidden" />
 

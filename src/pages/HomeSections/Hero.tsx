@@ -288,6 +288,11 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* On-Page SEO Descriptive Keywords Block */}
+        <p className="text-gray-500 text-xs max-w-xl mx-auto leading-relaxed mt-6 z-10 px-4 font-normal text-center select-none">
+          Compare and book from the best collection of <strong className="text-gray-700 font-semibold">Maharashtra resorts</strong>, beachfront cottages, <strong className="text-gray-700 font-semibold">Lonavala villas</strong>, <strong className="text-gray-700 font-semibold">Palghar beach stays</strong>, and farmhouses near Mumbai and Pune. Get direct rates, verified amenities, and commission-free hospitality.
+        </p>
+
       </div>
     </div>
   );

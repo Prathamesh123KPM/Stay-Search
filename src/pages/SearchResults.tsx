@@ -8,6 +8,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { useUser } from '../context/UserContext';
 import { propertyService, Property } from '../services/propertyService';
+import SEO from '../components/SEO';
 
 // Map has been replaced with a Google Maps iframe embed
 
@@ -271,6 +272,7 @@ export default function SearchResults() {
   const [isCompareExpanded, setIsCompareExpanded] = useState(false);
 
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const [showMapViewOnMobile, setShowMapViewOnMobile] = useState(false);
 
   // Compile final filter set
   const filteredStays = allStays.filter((stay) => {
@@ -403,6 +405,11 @@ export default function SearchResults() {
 
   return (
     <div className="pt-20 h-screen flex flex-col overflow-hidden bg-[#fafafa]">
+      <SEO
+        title={`Search Resorts, Villas & Stays ${dest ? 'in ' + dest : 'in Maharashtra'} | StaySearch`}
+        description={`Browse and book available resorts, beachfront rooms, forest villas and premium stays ${dest ? 'in ' + dest : 'in Maharashtra'}. Filter by price, amenities, and ratings.`}
+        keywords={`search resorts Maharashtra, book resort Palghar, Lonavala stays, beach hotels Alibaug, hotel search Pune, luxury villas Maharashtra, booking stays Maharashtra${dest ? ', stays in ' + dest : ''}`}
+      />
 
       {/* 1. Top Sticky Filters bar */}
       <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between gap-4 z-20 shadow-sm shrink-0">

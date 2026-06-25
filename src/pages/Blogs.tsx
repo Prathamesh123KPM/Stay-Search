@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Calendar, User, ArrowRight, X, Sparkles, Building, Landmark, ChevronRight, Check } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface Blog {
   id: string;
@@ -18,57 +19,26 @@ export default function Blogs() {
   const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
 
   // SEO & Schema Structured Data Optimization
-  React.useEffect(() => {
-    // 1. Dynamic Meta Title, Description, and Keywords Setup
-    const prevTitle = document.title;
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    const prevDescription = metaDescription.getAttribute('content') || '';
+  const blogTitle = selectedBlog
+    ? `${selectedBlog.title} | StaySearch Partner Insights`
+    : "Resort Owner Resources & Marketing Guides | StaySearch Hub";
 
-    let metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (!metaKeywords) {
-      metaKeywords = document.createElement('meta');
-      metaKeywords.setAttribute('name', 'keywords');
-      document.head.appendChild(metaKeywords);
-    }
-    const prevKeywords = metaKeywords.getAttribute('content') || '';
+  const blogDescription = selectedBlog
+    ? selectedBlog.excerpt
+    : "Scale your resort bookings, reduce high OTA commission losses, and optimize weekday occupancy. Practical advice for resort owners in Maharashtra.";
 
-    // 2. Structured Data Schema script setup
-    let schemaScript = document.getElementById('blog-seo-schema') as HTMLScriptElement;
-    if (!schemaScript) {
-      schemaScript = document.createElement('script');
-      schemaScript.id = 'blog-seo-schema';
-      schemaScript.type = 'application/ld+json';
-      document.head.appendChild(schemaScript);
-    }
+  const keywordsMap: Record<string, string> = {
+    'double-resort-bookings': 'resort marketing maharashtra, increase resort bookings, promote resort alibaug, direct booking channels, hospitality seo india',
+    'boutique-vs-giant-otas': 'hotel ota commission fees india, boutique resort listing, direct bookings hotels, list resort commission free, booking portals comparison',
+    'weekend-vs-weekday-occupancy': 'resort occupancy strategies, mid-week corporate offsite, corporate package ideas, workation packages maharashtra, fill hotel rooms weekdays'
+  };
 
-    const baseSchema = {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "StaySearch Resort Partner Hub",
-      "description": "Tactical guides, marketing strategies, and operations resources for resort and farmhouse owners in Maharashtra.",
-      "url": window.location.href
-    };
+  const blogKeywords = selectedBlog
+    ? (keywordsMap[selectedBlog.id] || 'resort marketing, increase hotel revenue')
+    : "resort marketing maharashtra, increase resort bookings, staysearch partner, commission free booking platform, resort occupancy strategy, hotel ota commission fees india";
 
-    if (selectedBlog) {
-      // Set Blog Article Specific SEO
-      document.title = `${selectedBlog.title} | StaySearch Partner Insights`;
-      metaDescription.setAttribute('content', selectedBlog.excerpt);
-      
-      const keywordsMap: Record<string, string> = {
-        'double-resort-bookings': 'resort marketing maharashtra, increase resort bookings, promote resort alibaug, direct booking channels, hospitality seo india',
-        'boutique-vs-giant-otas': 'hotel ota commission fees india, boutique resort listing, direct bookings hotels, list resort commission free, booking portals comparison',
-        'weekend-vs-weekday-occupancy': 'resort occupancy strategies, mid-week corporate offsite, corporate package ideas, workation packages maharashtra, fill hotel rooms weekdays'
-      };
-      metaKeywords.setAttribute('content', keywordsMap[selectedBlog.id] || 'resort marketing, increase hotel revenue');
-
-      // Inject Article Schema
-      const articleSchema = {
+  const blogSchema = selectedBlog
+    ? {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": selectedBlog.title,
@@ -89,25 +59,14 @@ export default function Blogs() {
           "@type": "WebPage",
           "@id": `${window.location.origin}/blogs#${selectedBlog.id}`
         }
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "StaySearch Resort Partner Hub",
+        "description": "Tactical guides, marketing strategies, and operations resources for resort and farmhouse owners in Maharashtra.",
+        "url": window.location.href
       };
-      schemaScript.text = JSON.stringify(articleSchema);
-    } else {
-      // Set Default Hub SEO
-      document.title = "Resort Owner Resources & Marketing Guides | StaySearch Hub";
-      metaDescription.setAttribute('content', 'Scale your resort bookings, reduce high OTA commission losses, and optimize weekday occupancy. Practical advice for resort owners in Maharashtra.');
-      metaKeywords.setAttribute('content', 'resort marketing maharashtra, increase resort bookings, staysearch partner, commission free booking platform, resort occupancy strategy, hotel ota commission fees india');
-      
-      schemaScript.text = JSON.stringify(baseSchema);
-    }
-
-    return () => {
-      document.title = prevTitle;
-      if (metaDescription) metaDescription.setAttribute('content', prevDescription);
-      if (metaKeywords) metaKeywords.setAttribute('content', prevKeywords);
-      const tag = document.getElementById('blog-seo-schema');
-      if (tag) tag.remove();
-    };
-  }, [selectedBlog]);
 
   const blogs: Blog[] = [
     {
@@ -286,6 +245,12 @@ export default function Blogs() {
 
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-20 bg-[#f4f7f5]">
+      <SEO
+        title={blogTitle}
+        description={blogDescription}
+        keywords={blogKeywords}
+        schema={blogSchema}
+      />
       {/* Background Decorative Circles */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#FF385C]/5 blur-[120px] rounded-full pointer-events-none z-0" />

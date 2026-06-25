@@ -1,9 +1,38 @@
 import React from 'react';
 import { Mail, MessageSquare, Phone, MapPin } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Support() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "StaySearch Contact Support",
+    "description": "Get in touch with StaySearch support for assistance with resort bookings, custom packages, and partner listings.",
+    "url": `${window.location.origin}/support`,
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "StaySearch",
+      "telephone": "+919987091858",
+      "email": "hello@staysearch.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Tourism Plaza, Main Road",
+        "addressLocality": "Palghar City",
+        "addressRegion": "Maharashtra",
+        "postalCode": "401404",
+        "addressCountry": "IN"
+      }
+    }
+  };
+
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-16 bg-[#fafafa]">
+      <SEO
+        title="Contact & Support | StaySearch Guest & Partner Help"
+        description="Need help with your resort booking or listing your property? Contact StaySearch customer care. We are here to support guests and resort owners."
+        keywords="contact StaySearch, customer care StaySearch, support StaySearch, hotel booking support, list property inquiry"
+        schema={contactSchema}
+      />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] hidden" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] hidden" />
       

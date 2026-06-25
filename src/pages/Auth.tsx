@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
 import { Lock, Mail, ArrowRight, Eye, EyeOff } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -40,6 +41,11 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen pt-24 pb-16 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden bg-[#0c1a12]">
+      <SEO
+        title="Login or Sign Up | StaySearch Account"
+        description="Sign in or create a StaySearch account to manage your bookings, save your favorite resorts, or list your property."
+        keywords="login StaySearch, sign up StaySearch, create account StaySearch, resort owner portal login"
+      />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF385C]/10 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
 

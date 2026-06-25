@@ -5,6 +5,7 @@ import { useUser } from '../context/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { propertyService, Property } from '../services/propertyService';
 import { getPropertyCoordinates, calculateDistance } from '../lib/location';
+import SEO from '../components/SEO';
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -86,6 +87,12 @@ export default function Dashboard() {
 
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-16 bg-[#0c1a12]">
+      <SEO
+        title="Dashboard | StaySearch Portal"
+        description="Manage your bookings, properties, and payouts on StaySearch."
+        keywords="staysearch dashboard, resort manager portal, staysearch admin"
+        robots="noindex, nofollow"
+      />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-rose-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
       

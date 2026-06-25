@@ -4,6 +4,7 @@ import { ShieldCheck, Star, MapPin, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { propertyService, Property } from '../services/propertyService';
+import SEO from '../components/SEO';
 
 export default function PremiumStays() {
   const { toggleFavorite, isFavorite } = useUser();
@@ -32,6 +33,11 @@ export default function PremiumStays() {
 
   return (
     <div className="pt-24 min-h-screen relative overflow-hidden pb-16 bg-[#0c1a12]">
+      <SEO
+        title="Verified Premium & Luxury Stays in Maharashtra | StaySearch"
+        description="Book official premium approved stays across Maharashtra. Luxury villas, beach resorts, and verified high-quality accommodations with top-notch hygiene standards."
+        keywords="premium resorts Maharashtra, luxury villas Lonavala, boutique hotels Alibaug, luxury stays Maharashtra, high-end farmhouses, verified stays Maharashtra"
+      />
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-green-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute top-[20%] right-0 w-[600px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
 
