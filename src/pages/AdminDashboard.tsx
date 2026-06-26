@@ -22,7 +22,7 @@ const AVAILABLE_AMENITIES = [
   'Couple Friendly', 'Modern Rooms', 'Breakfast'
 ];
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ isPradeep = false }: { isPradeep?: boolean }) {
   const { user, userRole, loading } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'overview' | 'properties' | 'bookings'>('overview');
@@ -33,7 +33,8 @@ export default function AdminDashboard() {
 
   // Password Lock state
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem('staysearch_admin_authenticated') === 'true';
+    const key = isPradeep ? 'staysearch_pradeep_authenticated' : 'staysearch_admin_authenticated';
+    return localStorage.getItem(key) === 'true';
   });
   const [passwordInput, setPasswordInput] = useState('');
   const [showAdminPassword, setShowAdminPassword] = useState(false);
@@ -306,18 +307,21 @@ export default function AdminDashboard() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordInput === 'admin@123') {
+    const correctPassword = isPradeep ? 'pradeep@123' : 'admin@123';
+    if (passwordInput === correctPassword) {
       setIsAdminAuthenticated(true);
-      localStorage.setItem('staysearch_admin_authenticated', 'true');
+      const key = isPradeep ? 'staysearch_pradeep_authenticated' : 'staysearch_admin_authenticated';
+      localStorage.setItem(key, 'true');
       setLoginError('');
     } else {
-      setLoginError('Invalid Administrator Password');
+      setLoginError(isPradeep ? 'Invalid Manager Password' : 'Invalid Administrator Password');
     }
   };
 
   const handleLogout = () => {
     setIsAdminAuthenticated(false);
-    localStorage.removeItem('staysearch_admin_authenticated');
+    const key = isPradeep ? 'staysearch_pradeep_authenticated' : 'staysearch_admin_authenticated';
+    localStorage.removeItem(key);
     setPasswordInput('');
   };
 
@@ -417,7 +421,7 @@ export default function AdminDashboard() {
         foodType: formData.foodType,
         rules: rules,
         availability: true,
-        ownerId: user?.uid || 'admin',
+        ownerId: isPradeep ? 'pradeep' : (user?.uid || 'admin'),
         websiteLink: formData.websiteLink,
         googleMyBusiness: formData.googleMyBusiness,
         instagramProfile: formData.instagramProfile
@@ -458,7 +462,18 @@ export default function AdminDashboard() {
     }
   };
 
-  const filteredProperties = properties.filter(p => 
+  const displayProperties = isPradeep 
+    ? properties.filter(p => p.ownerId === 'pradeep')
+    : properties;
+
+  const displayBookings = isPradeep
+    ? bookings.filter(b => {
+        const prop = properties.find(p => p.id === b.propertyId);
+        return prop?.ownerId === 'pradeep';
+      })
+    : bookings;
+
+  const filteredProperties = displayProperties.filter(p => 
     p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (p.type && p.type.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -477,9 +492,9 @@ export default function AdminDashboard() {
     return (
       <>
         <SEO
-          title="Admin Dashboard | StaySearch Portal"
-          description="Manage your bookings, properties, and payouts on StaySearch."
-          keywords="staysearch dashboard, resort manager portal, staysearch admin"
+          title={isPradeep ? "Manager Portal (Pradeep) | StaySearch" : "Admin Dashboard | StaySearch Portal"}
+          description={isPradeep ? "Manage your uploaded resorts and homestays on StaySearch." : "Manage bookings, properties, and payouts on StaySearch."}
+          keywords={isPradeep ? "staysearch manager, pradeep portal, staysearch admin" : "staysearch dashboard, resort manager portal, staysearch admin"}
           robots="noindex, nofollow"
         />
         <div className="min-h-screen pt-36 pb-16 bg-[#fafafa] relative overflow-hidden flex flex-col items-center justify-center">
@@ -494,8 +509,10 @@ export default function AdminDashboard() {
                 alt="StaySearch Logo" 
                 className="w-16 h-16 rounded-2xl object-cover mx-auto mb-4 shadow-lg shadow-[#FF385C]/20 border border-gray-200" 
               />
-              <h2 className="text-2xl font-black text-[#222222]">Administrator Access</h2>
-              <p className="text-[#222222]/50 text-xs mt-1 uppercase tracking-widest font-bold">StaySearch Verification Portal</p>
+              <h2 className="text-2xl font-black text-[#222222]">{isPradeep ? "Manager Access" : "Administrator Access"}</h2>
+              <p className="text-[#222222]/50 text-xs mt-1 uppercase tracking-widest font-bold">
+                {isPradeep ? "Pradeep's Verification Portal" : "StaySearch Verification Portal"}
+              </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
@@ -548,9 +565,9 @@ export default function AdminDashboard() {
   return (
     <>
       <SEO
-        title="Admin Dashboard | StaySearch Portal"
-        description="Manage your bookings, properties, and payouts on StaySearch."
-        keywords="staysearch dashboard, resort manager portal, staysearch admin"
+        title={isPradeep ? "Manager Portal (Pradeep) | StaySearch" : "Admin Dashboard | StaySearch Portal"}
+        description={isPradeep ? "Manage your uploaded resorts and homestays on StaySearch." : "Manage bookings, properties, and payouts on StaySearch."}
+        keywords={isPradeep ? "staysearch manager, pradeep portal, staysearch admin" : "staysearch dashboard, resort manager portal, staysearch admin"}
         robots="noindex, nofollow"
       />
       <div className="pt-36 min-h-screen relative overflow-hidden pb-16 bg-[#fafafa]">
@@ -570,28 +587,32 @@ export default function AdminDashboard() {
               />
               <div>
                 <h1 className="text-3xl font-extrabold tracking-tight text-[#222222] flex items-center gap-2">
-                  Admin Portal
+                  {isPradeep ? "Manager Portal" : "Admin Portal"}
                   <span className="text-xs bg-[#FF385C]/20 text-[#FF385C] border border-[#FF385C]/30 px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">
-                    Verified Stays Manager
+                    {isPradeep ? "Pradeep's Stays" : "Verified Stays Manager"}
                   </span>
                 </h1>
-                <p className="text-[#222222]/50 text-xs mt-1 uppercase tracking-widest font-bold">List and verify Palghar resorts & homestays</p>
+                <p className="text-[#222222]/50 text-xs mt-1 uppercase tracking-widest font-bold">
+                  {isPradeep ? "Manage your uploaded resorts & homestays" : "List and verify Palghar resorts & homestays"}
+                </p>
               </div>
             </div>
             <div className="flex gap-4 flex-wrap">
-              <button 
-                onClick={async () => {
-                  if (window.confirm("This will clean the current local storage listings and re-seed the default verified resorts. Proceed?")) {
-                    await seedDatabase();
-                    // Clear local storage for properties to force refresh from mock database
-                    localStorage.removeItem('staysearch_properties_local');
-                    loadData();
-                  }
-                }}
-                className="bg-white/5 border border-gray-200 hover:bg-white/10 text-[#222222] px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all cursor-pointer shadow-md hover:border-white/20"
-              >
-                <Database className="w-4 h-4 text-[#FF385C]" /> Reset & Seed defaults
-              </button>
+              {!isPradeep && (
+                <button 
+                  onClick={async () => {
+                    if (window.confirm("This will clean the current local storage listings and re-seed the default verified resorts. Proceed?")) {
+                      await seedDatabase();
+                      // Clear local storage for properties to force refresh from mock database
+                      localStorage.removeItem('staysearch_properties_local');
+                      loadData();
+                    }
+                  }}
+                  className="bg-white/5 border border-gray-200 hover:bg-white/10 text-[#222222] px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all cursor-pointer shadow-md hover:border-white/20"
+                >
+                  <Database className="w-4 h-4 text-[#FF385C]" /> Reset & Seed defaults
+                </button>
+              )}
               <button 
                 onClick={() => handleOpenModal()}
                 className="bg-[#FF385C] hover:bg-[#FF385C]/90 text-[#222222] px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all cursor-pointer shadow-lg shadow-[#FF385C]/20 border border-[#FF385C]/50"
@@ -642,16 +663,16 @@ export default function AdminDashboard() {
                         <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-xl rounded-full" />
                         <Calendar className="w-8 h-8 text-blue-400 mb-4" />
                         <p className="text-[#222222]/50 text-[10px] font-bold uppercase tracking-widest mb-1">Total Reservations</p>
-                        <p className="text-4xl font-extrabold text-[#222222]">{bookings.length}</p>
+                        <p className="text-4xl font-extrabold text-[#222222]">{displayBookings.length}</p>
                         <p className="text-[10px] text-[#222222]/30 mt-2 font-medium">Pending, upcoming, & completed</p>
                       </div>
                       <div className="relative overflow-hidden bg-white border border-gray-200 p-6 rounded-2xl shadow-md group">
                         <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/5 blur-xl rounded-full" />
                         <Home className="w-8 h-8 text-[#FF385C] mb-4" />
                         <p className="text-[#222222]/50 text-[10px] font-bold uppercase tracking-widest mb-1">Listed Resorts & Stays</p>
-                        <p className="text-4xl font-extrabold text-[#222222]">{properties.length}</p>
+                        <p className="text-4xl font-extrabold text-[#222222]">{displayProperties.length}</p>
                         <p className="text-[10px] text-[#222222]/30 mt-2 font-medium">
-                          {properties.filter(p => p.type === 'Resort').length} Resorts | {properties.filter(p => p.type !== 'Resort').length} Other Stays
+                          {displayProperties.filter(p => p.type === 'Resort').length} Resorts | {displayProperties.filter(p => p.type !== 'Resort').length} Other Stays
                         </p>
                       </div>
                       <div className="relative overflow-hidden bg-white border border-gray-200 p-6 rounded-2xl shadow-md group">
@@ -659,10 +680,10 @@ export default function AdminDashboard() {
                         <ShieldCheck className="w-8 h-8 text-green-600 mb-4" />
                         <p className="text-[#222222]/50 text-[10px] font-bold uppercase tracking-widest mb-1">MTDC Verified Stays</p>
                         <p className="text-4xl font-extrabold text-green-600">
-                          {properties.filter(p => p.isVerified !== false).length}
+                          {displayProperties.filter(p => p.isVerified !== false).length}
                         </p>
                         <p className="text-[10px] text-[#222222]/30 mt-2 font-medium">
-                          {Math.round((properties.filter(p => p.isVerified !== false).length / (properties.length || 1)) * 100)}% verified ratio
+                          {Math.round((displayProperties.filter(p => p.isVerified !== false).length / (displayProperties.length || 1)) * 100)}% verified ratio
                         </p>
                       </div>
                     </div>
@@ -793,7 +814,7 @@ export default function AdminDashboard() {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-y divide-gray-150 bg-white">
-                          {bookings.map(b => (
+                          {displayBookings.map(b => (
                             <tr key={b.id} className="hover:bg-white/5 transition-colors">
                               <td className="px-5 py-4 font-bold text-[#222222] max-w-[200px] truncate">{b.propertyName}</td>
                               <td className="px-5 py-4 text-[#222222]/60 font-medium">{b.checkIn} - {b.checkOut}</td>
@@ -834,7 +855,7 @@ export default function AdminDashboard() {
                           ))}
                         </tbody>
                       </table>
-                      {bookings.length === 0 && (
+                      {displayBookings.length === 0 && (
                         <div className="text-center py-12 bg-gray-50">
                           <p className="text-[#222222]/40 text-sm">No reservations found in database.</p>
                         </div>

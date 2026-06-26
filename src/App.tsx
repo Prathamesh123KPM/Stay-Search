@@ -40,6 +40,7 @@ function AppContent() {
           <Route path="/support" element={<Support />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/pradeep" element={<AdminDashboard isPradeep={true} />} />
           <Route path="/blogs" element={<Blogs />} />
         </Routes>
       </main>
