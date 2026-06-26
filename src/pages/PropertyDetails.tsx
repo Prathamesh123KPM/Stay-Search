@@ -133,6 +133,51 @@ export default function PropertyDetails() {
   };
 
 
+  // Determine breadcrumb destination dynamically
+  const getBreadcrumbLocation = () => {
+    if (!property || !property.location) return { label: 'Stays', query: '' };
+    
+    const loc = property.location.toLowerCase();
+    
+    // List of known destinations to prioritize
+    const knownDestinations = [
+      { key: 'kelva beach', label: 'Kelva Beach' },
+      { key: 'kelva', label: 'Kelva Beach' },
+      { key: 'palghar', label: 'Palghar' },
+      { key: 'lonavala', label: 'Lonavala' },
+      { key: 'khandala', label: 'Lonavala' },
+      { key: 'alibaug', label: 'Alibaug' },
+      { key: 'mahabaleshwar', label: 'Mahabaleshwar' },
+      { key: 'igatpuri', label: 'Igatpuri' },
+      { key: 'dahanu', label: 'Dahanu' },
+      { key: 'karjat', label: 'Karjat' },
+      { key: 'wada', label: 'Wada' },
+      { key: 'saphale', label: 'Saphale' },
+      { key: 'bordi', label: 'Bordi' }
+    ];
+
+    for (const dest of knownDestinations) {
+      if (loc.includes(dest.key)) {
+        return { label: dest.label, query: dest.label };
+      }
+    }
+
+    // If no known destination matches, try to extract a clean name
+    const parts = property.location.split(',').map(p => p.trim());
+    if (parts.length > 0) {
+      let mainLoc = parts[parts.length - 1];
+      // If the last part is too broad, grab the second-to-last
+      if ((mainLoc.toLowerCase() === 'maharashtra' || mainLoc.toLowerCase() === 'india') && parts.length > 1) {
+        mainLoc = parts[parts.length - 2];
+      }
+      return { label: mainLoc, query: mainLoc };
+    }
+    
+    return { label: property.location, query: property.location };
+  };
+
+  const { label: breadcrumbLabel, query: breadcrumbQuery } = getBreadcrumbLocation();
+
   const seoTitle = property 
     ? `${property.title} in ${property.location} | StaySearch` 
     : loading 
@@ -205,7 +250,7 @@ export default function PropertyDetails() {
               <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gray-500">
                 <Link to="/" className="hover:text-[#FF385C] transition-colors">Home</Link>
                 <span>/</span>
-                <Link to="/search?dest=kelva" className="hover:text-[#FF385C] transition-colors">kelva Beach</Link>
+                <Link to={`/search?dest=${encodeURIComponent(breadcrumbQuery)}`} className="hover:text-[#FF385C] transition-colors">{breadcrumbLabel}</Link>
                 <span>/</span>
                 <span className="text-[#222222] truncate max-w-[150px] sm:max-w-none">{property.title}</span>
               </div>
