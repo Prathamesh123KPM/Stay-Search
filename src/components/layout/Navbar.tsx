@@ -99,12 +99,14 @@ export default function Navbar() {
 
           {/* Right Action Menu */}
           <div className="hidden md:flex items-center gap-3">
-            <Link 
-              to="/admin" 
-              className="text-xs font-bold text-gray-600 hover:text-[#FF385C] transition-colors px-3 py-1.5 rounded-full hover:bg-gray-50 cursor-pointer"
-            >
-              Become a host
-            </Link>
+            {location.pathname === '/admin' && (
+              <Link 
+                to="/admin" 
+                className="text-xs font-bold text-gray-600 hover:text-[#FF385C] transition-colors px-3 py-1.5 rounded-full hover:bg-gray-50 cursor-pointer"
+              >
+                Become a host
+              </Link>
+            )}
             
             <Link 
               to="/support" 
@@ -214,7 +216,7 @@ export default function Navbar() {
                 { label: 'Destination', to: '/destinations' },
                 { label: 'Compare Resorts', to: '/compare' },
                 { label: 'Services', to: '/support' },
-                { label: 'Become a Host', to: '/admin' }
+                ...(location.pathname === '/admin' ? [{ label: 'Become a Host', to: '/admin' }] : [])
               ].map((item) => (
                 <Link
                   key={item.label}
