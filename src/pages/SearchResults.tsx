@@ -272,7 +272,6 @@ export default function SearchResults() {
   const [isCompareExpanded, setIsCompareExpanded] = useState(false);
 
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
-  const [showMapViewOnMobile, setShowMapViewOnMobile] = useState(false);
 
   // Compile final filter set
   const filteredStays = allStays.filter((stay) => {
@@ -894,28 +893,6 @@ export default function SearchResults() {
           </div>
         )}
       </AnimatePresence>
-
-      {/* Floating mobile navigation toggle switch */}
-      <div className="lg:hidden fixed bottom-16 left-1/2 -translate-x-1/2 z-30 flex bg-[#222222]/95 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-1 shrink-0 mb-2">
-        <button
-          onClick={() => setShowMapViewOnMobile(false)}
-          className={`px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition-all ${!showMapViewOnMobile
-              ? 'bg-[#FF385C] text-white shadow-lg shadow-rose-500/20'
-              : 'text-white/70 hover:text-white'
-            }`}
-        >
-          List view
-        </button>
-        <button
-          onClick={() => setShowMapViewOnMobile(true)}
-          className={`px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition-all ${showMapViewOnMobile
-              ? 'bg-[#FF385C] text-white shadow-lg shadow-rose-500/20'
-              : 'text-white/70 hover:text-white'
-            }`}
-        >
-          Map view
-        </button>
-      </div>
 
     </div>
   );
